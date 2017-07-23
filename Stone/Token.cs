@@ -12,7 +12,7 @@ namespace Stone
 
         public int LineNumber { get; private set; }
 
-        public bool IsIdentifier
+        public virtual bool IsIdentifier
         {
             get
             {
@@ -20,7 +20,7 @@ namespace Stone
             }
         }
 
-        public bool IsNumber
+        public virtual bool IsNumber
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Stone
             }
         }
 
-        public bool IsString
+        public virtual bool IsString
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Stone
             }
         }
 
-        public int Number
+        public virtual int Number
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Stone
             }
         }
 
-        public string Text
+        public virtual string Text
         {
             get
             {

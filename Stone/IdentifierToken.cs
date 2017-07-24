@@ -4,7 +4,7 @@ namespace Stone
     {
         private string text;
 
-        protected IdentifierToken(int lineNumber, string identifier)
+        public IdentifierToken(int lineNumber, string identifier)
             : base(lineNumber)
         {
             this.text = identifier;

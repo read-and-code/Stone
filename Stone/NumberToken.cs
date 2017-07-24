@@ -6,7 +6,7 @@ namespace Stone
     {
         private int value;
 
-        protected NumberToken(int lineNumber, int value)
+        public NumberToken(int lineNumber, int value)
             : base(lineNumber)
         {
             this.value = value;

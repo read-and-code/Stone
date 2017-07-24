@@ -4,7 +4,7 @@ namespace Stone
     {
         private string literal;
 
-        protected StringToken(int lineNumber, string literal)
+        public StringToken(int lineNumber, string literal)
             : base(lineNumber)
         {
             this.literal = literal;

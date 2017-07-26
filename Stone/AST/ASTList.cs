@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Stone.AST
@@ -23,15 +24,8 @@ namespace Stone.AST
         {
             get
             {
-                foreach (ASTree asTree in this.Children)
-                {
-                    if (!string.IsNullOrEmpty(asTree.Location))
-                    {
-                        return asTree.Location;
-                    }
-                }
-
-                return string.Empty;
+                return this.Children.Select(asTree => asTree.Location)
+                    .FirstOrDefault(location => !string.IsNullOrEmpty(location));
             }
         }
 
@@ -49,17 +43,7 @@ namespace Stone.AST
 
         public override string ToString()
         {
-            string separator = string.Empty;
-            StringBuilder stringBuilder = new StringBuilder('(');
-
-            foreach (ASTree asTree in this.Children)
-            {
-                stringBuilder.Append(separator);
-                stringBuilder.Append(asTree.ToString());
-                separator = " ";
-            }
-
-            return stringBuilder.Append(')').ToString();
+            return "(" + string.Join(" ", this.Children) + ")";
         }
     }
 }

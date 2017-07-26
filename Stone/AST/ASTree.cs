@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Stone.AST
 {
-    public abstract class ASTree : IEnumerable
+    public abstract class ASTree : IEnumerable<ASTree>
     {
         public abstract int NumberOfChildren { get; }
 
@@ -10,11 +11,16 @@ namespace Stone.AST
 
         public abstract ASTree GetChild(int i);
 
-        public abstract IEnumerator GetChildren();
+        public abstract IEnumerator<ASTree> GetChildren();
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<ASTree> GetEnumerator()
         {
             return this.GetChildren();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

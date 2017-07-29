@@ -1,4 +1,6 @@
-namespace Stone
+using Stone.Exceptions;
+
+namespace Stone.Tokens
 {
     public abstract class Token
     {

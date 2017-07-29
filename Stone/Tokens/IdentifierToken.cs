@@ -1,4 +1,4 @@
-namespace Stone
+namespace Stone.Tokens
 {
     public class IdentifierToken : Token
     {

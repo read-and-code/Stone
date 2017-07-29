@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using Stone.Exceptions;
+using Stone.Tokens;
 
 namespace Stone
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Stone
+namespace Stone.Tokens
 {
     public class NumberToken : Token
     {

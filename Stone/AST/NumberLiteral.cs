@@ -1,3 +1,5 @@
+using Stone.Tokens;
+
 namespace Stone.AST
 {
     public class NumberLiteral : ASTLeaf

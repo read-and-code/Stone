@@ -1,7 +1,7 @@
 using System;
-using System.IO;
+using Stone.Tokens;
 
-namespace Stone
+namespace Stone.Exceptions
 {
     public class ParseException : Exception
     {
@@ -15,8 +15,8 @@ namespace Stone
         {
         }
 
-        public ParseException(IOException exception)
-            : base("IO error", exception)
+        public ParseException(Exception exception)
+            : base(string.Empty, exception)
         {
         }
 
@@ -33,7 +33,7 @@ namespace Stone
             }
             else
             {
-                return string.Format("\"{0}\" at line {1}", token.Text, token.LineNumber);
+                return string.Format(@"""{0}"" at line {1}", token.Text, token.LineNumber);
             }
         }
     }

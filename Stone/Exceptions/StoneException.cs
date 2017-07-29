@@ -1,7 +1,7 @@
 using System;
 using Stone.AST;
 
-namespace Stone
+namespace Stone.Exceptions
 {
     public class StoneException : Exception
     {

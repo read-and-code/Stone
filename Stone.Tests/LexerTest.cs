@@ -1,5 +1,6 @@
 using System.IO;
 using Stone;
+using Stone.Tokens;
 using Xunit;
 
 namespace Stone.Tests

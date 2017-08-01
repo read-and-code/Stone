@@ -10,7 +10,7 @@ namespace Stone.Parsers
     {
         public TokenElement(Type type)
         {
-            this.Type = type;
+            this.Type = type == null ? typeof(ASTLeaf) : type;
         }
 
         protected Type Type { get; private set; }
@@ -21,7 +21,7 @@ namespace Stone.Parsers
 
             if (this.Test(token))
             {
-                ASTree asTree = ASTreeFactory.Make(this.Type, null);
+                ASTree asTree = ASTreeFactory.Make(this.Type, new[] { token });
 
                 asTrees.Add(asTree);
             }
@@ -33,7 +33,9 @@ namespace Stone.Parsers
 
         public override bool Match(Lexer lexer)
         {
-            return this.Test(lexer.Peek(0));
+            Token token = lexer.Peek(0);
+
+            return this.Test(token);
         }
 
         public abstract bool Test(Token token);

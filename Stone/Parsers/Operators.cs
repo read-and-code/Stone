@@ -20,9 +20,9 @@ namespace Stone.Parsers
             }
         }
 
-        public void Put(string name, int precedence, bool leftAssociative)
+        public void Put(string name, int precedenceValue, bool leftAssociative)
         {
-            this.Add(name, new Precedence(precedence, leftAssociative));
+            this.Add(name, new Precedence(precedenceValue, leftAssociative));
         }
     }
 }

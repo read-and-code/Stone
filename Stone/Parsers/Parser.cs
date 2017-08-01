@@ -6,12 +6,19 @@ namespace Stone.Parsers
 {
     public class Parser
     {
+        public Parser()
+        {
+            this.Elements = new List<Element>();
+        }
+
         public Parser(Type type)
+            : this()
         {
             this.Type = type;
         }
 
         protected Parser(Parser parser)
+            : this()
         {
             this.Elements = parser.Elements;
             this.Type = parser.Type;
@@ -40,7 +47,21 @@ namespace Stone.Parsers
                 element.Parse(lexer, asTrees);
             }
 
-            return ASTreeFactory.Make(this.Type, new[] { asTrees });
+            if (this.Type == null)
+            {
+                if (asTrees.Count == 1)
+                {
+                    return asTrees[0];
+                }
+                else
+                {
+                    return new ASTList(asTrees);
+                }
+            }
+            else
+            {
+                return ASTreeFactory.Make(this.Type, new[] { asTrees });
+            }
         }
 
         public bool Match(Lexer lexer)
@@ -64,6 +85,7 @@ namespace Stone.Parsers
 
         public Parser Reset(Type type)
         {
+            this.Type = type;
             this.Elements = new List<Element>();
 
             return this;
@@ -180,6 +202,7 @@ namespace Stone.Parsers
             {
                 Parser otherwise = new Parser(parser.Type);
 
+                this.Elements = new List<Element>();
                 this.Or(new List<Parser> { parser, otherwise });
             }
 

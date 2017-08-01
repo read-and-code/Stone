@@ -40,9 +40,9 @@ namespace Stone.Parsers
             return this.Factor.Match(lexer);
         }
 
-        private static bool RightIsExpression(int precedence, Precedence nextPrecedence)
+        private static bool IsRightExpression(int precedence, Precedence nextPrecedence)
         {
-            if (nextPrecedence.LeftAssociative)
+            if (nextPrecedence.IsLeftAssociative)
             {
                 return precedence < nextPrecedence.Value;
             }
@@ -75,7 +75,7 @@ namespace Stone.Parsers
             ASTree right = this.Factor.Parse(lexer);
             Precedence nextPrecedence = this.NextOperator(lexer);
 
-            while (nextPrecedence != null && RightIsExpression(precedenceValue, nextPrecedence))
+            while (nextPrecedence != null && IsRightExpression(precedenceValue, nextPrecedence))
             {
                 right = this.DoShift(lexer, right, nextPrecedence.Value);
 

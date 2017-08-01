@@ -8,7 +8,7 @@ namespace Stone.Tests
     public class LexerTest
     {
         [Fact]
-        public void Read()
+        public void ReadToken()
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/lexer.txt");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));

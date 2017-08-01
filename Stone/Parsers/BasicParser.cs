@@ -30,6 +30,7 @@ namespace Stone.Parsers
 
         public BasicParser()
         {
+            // primary : "(" expression ")" | NUMBER | IDENTIFIER | STRING
             this.primary = Parser.Rule(typeof(PrimaryExpression))
                 .Or(new List<Parser>
                     {
@@ -40,6 +41,7 @@ namespace Stone.Parsers
                         Parser.Rule().String(typeof(StringLiteral)),
                     });
 
+            // factor : "-" primary | primary
             this.factor = Parser.Rule()
                 .Or(new List<Parser>
                     {
@@ -48,17 +50,23 @@ namespace Stone.Parsers
                         this.primary,
                     });
 
+            // expression : factor { OP factor }
             this.expression = this.basicExpression.Expression(typeof(BinaryExpression), this.factor, this.operators);
 
+            // block : "{" [ statement ] {(";" | EOL) [ statement ]} "}"
             this.block = Parser.Rule(typeof(BlockStatement))
                 .Separator(new List<string> { "{" }).Option(this.basicStatement)
                 .Repeat(Parser.Rule().Separator(new List<string> { ";", Token.EOL })
                     .Option(this.basicStatement))
                 .Separator(new List<string> { "}" });
 
+            // expression
             this.simple = Parser.Rule(typeof(PrimaryExpression)).Ast(this.expression);
 
-            this.statement = this.basicExpression
+            // statement : "if" expression block [ "else" block ]
+            //           | "while" expression block
+            //           | simple
+            this.statement = this.basicStatement
                 .Or(new List<Parser>
                     {
                         Parser.Rule(typeof(IfStatement)).Separator(new List<string> { "if" })
@@ -70,6 +78,7 @@ namespace Stone.Parsers
                         this.simple,
                     });
 
+            // program : [ statement ] (";" | EOL)
             this.program = Parser.Rule()
                 .Or(new List<Parser>
                     {
@@ -86,7 +95,7 @@ namespace Stone.Parsers
             this.operators.Put(">", 2, Operators.Left);
             this.operators.Put("<", 2, Operators.Left);
             this.operators.Put("+", 3, Operators.Left);
-            this.operators.Put("-", 4, Operators.Left);
+            this.operators.Put("-", 3, Operators.Left);
             this.operators.Put("*", 4, Operators.Left);
             this.operators.Put("/", 4, Operators.Left);
             this.operators.Put("%", 4, Operators.Left);

@@ -2,14 +2,14 @@ namespace Stone.Parsers
 {
     public class Precedence
     {
-        public Precedence(int value, bool leftAssociative)
+        public Precedence(int value, bool isLeftAssociative)
         {
             this.Value = value;
-            this.LeftAssociative = leftAssociative;
+            this.IsLeftAssociative = isLeftAssociative;
         }
 
         public int Value { get; set; }
 
-        public bool LeftAssociative { get; set; }
+        public bool IsLeftAssociative { get; set; }
     }
 }

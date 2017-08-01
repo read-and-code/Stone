@@ -7,7 +7,7 @@ namespace Stone.Parsers
     {
         public static ASTree Make(Type type, object[] arguments)
         {
-            return (ASTree)Activator.CreateInstance(type, arguments);
+            return arguments != null ? (ASTree)Activator.CreateInstance(type, arguments) : (ASTree)Activator.CreateInstance(type);
         }
     }
 }

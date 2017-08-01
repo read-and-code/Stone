@@ -40,7 +40,15 @@ namespace Stone.Parsers
 
         private Parser Choose(Lexer lexer)
         {
-            return this.Parsers.FirstOrDefault(parser => parser.Match(lexer));
+            foreach (Parser parser in this.Parsers)
+            {
+                if (parser.Match(lexer))
+                {
+                    return parser;
+                }
+            }
+
+            return null;
         }
     }
 }

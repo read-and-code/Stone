@@ -58,6 +58,17 @@ namespace Stone.Parsers
                     return new ASTList(asTrees);
                 }
             }
+            else if (this.Type == typeof(PrimaryExpression))
+            {
+                if (asTrees.Count == 1)
+                {
+                    return asTrees[0];
+                }
+                else
+                {
+                    return new PrimaryExpression(asTrees);
+                }
+            }
             else
             {
                 return ASTreeFactory.Make(this.Type, new[] { asTrees });

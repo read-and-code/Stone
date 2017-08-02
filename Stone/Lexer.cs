@@ -85,6 +85,8 @@ namespace Stone
 
                 match = match.NextMatch();
             }
+
+            this.queue.Add(new IdentifierToken(lineNumber, Token.EOL));
         }
 
         protected void AddToken(int lineNumber, Match match)

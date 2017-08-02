@@ -14,8 +14,12 @@ namespace Stone.Tests
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             Token token = lexer.Read();
 
-            Assert.True(token.IsIdentifier);
-            Assert.Equal("while", token.Text);
+            while (token != Token.EOF)
+            {
+                System.Console.WriteLine(token.ToString());
+
+                token = lexer.Read();
+            }
         }
     }
 }

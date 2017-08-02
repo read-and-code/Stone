@@ -35,5 +35,10 @@ namespace Stone.Tokens
                 return this.value;
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("Token: number, value: {0}", this.Number);
+        }
     }
 }

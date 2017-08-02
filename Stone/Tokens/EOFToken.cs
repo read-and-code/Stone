@@ -6,5 +6,10 @@ namespace Stone.Tokens
             : base(lineNumber)
         {
         }
+
+        public override string ToString()
+        {
+            return "Token: end of file";
+        }
     }
 }

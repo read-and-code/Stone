@@ -2,12 +2,10 @@ namespace Stone.Tokens
 {
     public class IdentifierToken : Token
     {
-        private string text;
-
         public IdentifierToken(int lineNumber, string identifier)
             : base(lineNumber)
         {
-            this.text = identifier;
+            this.Text = identifier;
         }
 
         public override bool IsIdentifier
@@ -18,12 +16,11 @@ namespace Stone.Tokens
             }
         }
 
-        public override string Text
+        public override string Text { get; }
+
+        public override string ToString()
         {
-            get
-            {
-                return this.text;
-            }
+            return string.Format("Token: identifier, name: {0}", this.Text);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Stone.Tests
         [Fact]
         public void Parse()
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/declaration.txt");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/lexer2.txt");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             BasicParser basicParser = new BasicParser();
 

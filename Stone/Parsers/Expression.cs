@@ -56,7 +56,7 @@ namespace Stone.Parsers
         {
             Token token = lexer.Peek(0);
 
-            if (token.IsIdentifier)
+            if (token.IsIdentifier && this.Operators.ContainsKey(token.Text))
             {
                 return this.Operators[token.Text];
             }

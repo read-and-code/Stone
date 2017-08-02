@@ -103,7 +103,7 @@ namespace Stone.Parsers
 
         public ASTree Parse(Lexer lexer)
         {
-            return this.expression.Parse(lexer);
+            return this.program.Parse(lexer);
         }
     }
 }

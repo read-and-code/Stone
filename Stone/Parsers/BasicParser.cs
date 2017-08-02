@@ -83,8 +83,9 @@ namespace Stone.Parsers
                 .Or(new List<Parser>
                     {
                         this.statement,
-                        Parser.Rule(typeof(NullStatement)).Separator(new List<string> { ";", Token.EOL }),
-                    });
+                        Parser.Rule(typeof(NullStatement)),
+                    })
+                .Separator(new List<string> { ";", Token.EOL });
 
             this.reservedKeywords.Add(";");
             this.reservedKeywords.Add("}");

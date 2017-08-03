@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Stone.Exceptions;
+using Stone.Interpreter;
 
 namespace Stone.AST
 {
@@ -20,6 +23,20 @@ namespace Stone.AST
         public override string ToString()
         {
             return string.Format("-{0}", this.Operand);
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            object value = this.Operand.Eval(environment);
+
+            if (value is int)
+            {
+                return -Convert.ToInt32(value);
+            }
+            else
+            {
+                throw new StoneException("Bad type for -", this);
+            }
         }
     }
 }

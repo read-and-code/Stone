@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Stone.Interpreter;
 
 namespace Stone.AST
 {
@@ -36,6 +38,29 @@ namespace Stone.AST
         public override string ToString()
         {
             return string.Format("(if {0} {1} else {2})", this.Condition, this.ThenBlock, this.ElseBlock);
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            object condition = this.Condition.Eval(environment);
+
+            if (condition is int && Convert.ToInt32(condition) != 0)
+            {
+                return this.ThenBlock.Eval(environment);
+            }
+            else
+            {
+                ASTree body = this.ElseBlock;
+
+                if (body == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return body.Eval(environment);
+                }
+            }
         }
     }
 }

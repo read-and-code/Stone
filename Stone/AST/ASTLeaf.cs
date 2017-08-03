@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Stone.Exceptions;
+using Stone.Interpreter;
 using Stone.Tokens;
 
 namespace Stone.AST
@@ -44,6 +46,11 @@ namespace Stone.AST
         public override string ToString()
         {
             return this.Token.Text;
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
         }
     }
 }

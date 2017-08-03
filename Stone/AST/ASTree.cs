@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Stone.Interpreter;
 
 namespace Stone.AST
 {
@@ -12,6 +13,8 @@ namespace Stone.AST
         public abstract ASTree GetChild(int i);
 
         public abstract IEnumerator<ASTree> GetChildren();
+
+        public abstract object Eval(IEnvironment environment);
 
         public IEnumerator<ASTree> GetEnumerator()
         {

@@ -1,3 +1,4 @@
+using Stone.Interpreter;
 using Stone.Tokens;
 
 namespace Stone.AST
@@ -15,6 +16,11 @@ namespace Stone.AST
             {
                 return this.Token.Text;
             }
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            return this.Value;
         }
     }
 }

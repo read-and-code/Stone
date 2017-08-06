@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Stone.Tests
 {
-    public class ParserTest
+    public class BasicParserTest
     {
         [Fact]
         public void Parse()

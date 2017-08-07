@@ -21,12 +21,9 @@ namespace Stone.Interpreter
 
         public object Get(string name)
         {
-            if (!this.Values.ContainsKey(name))
-            {
-                return null;
-            }
+            object value = null;
 
-            object value = this.Values[name];
+            this.Values.TryGetValue(name, out value);
 
             if (value == null && this.OuterEnvironment != null)
             {

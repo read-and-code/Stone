@@ -27,11 +27,6 @@ namespace Stone.AST
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("(while {0} {1})", this.Condition, this.Body);
-        }
-
         public override object Eval(IEnvironment environment)
         {
             object result = 0;
@@ -49,6 +44,11 @@ namespace Stone.AST
                     result = this.Body.Eval(environment);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("(while {0} {1})", this.Condition, this.Body);
         }
     }
 }

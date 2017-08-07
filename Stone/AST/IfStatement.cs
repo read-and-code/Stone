@@ -35,11 +35,6 @@ namespace Stone.AST
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("(if {0} {1} else {2})", this.Condition, this.ThenBlock, this.ElseBlock);
-        }
-
         public override object Eval(IEnvironment environment)
         {
             object condition = this.Condition.Eval(environment);
@@ -61,6 +56,11 @@ namespace Stone.AST
                     return body.Eval(environment);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("(if {0} {1} else {2})", this.Condition, this.ThenBlock, this.ElseBlock);
         }
     }
 }

@@ -20,11 +20,6 @@ namespace Stone.AST
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("-{0}", this.Operand);
-        }
-
         public override object Eval(IEnvironment environment)
         {
             object value = this.Operand.Eval(environment);
@@ -37,6 +32,11 @@ namespace Stone.AST
             {
                 throw new StoneException("Bad type for -", this);
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("-{0}", this.Operand);
         }
     }
 }

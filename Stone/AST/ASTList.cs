@@ -12,20 +12,20 @@ namespace Stone.AST
             this.Children = children;
         }
 
-        public override int NumberOfChildren
-        {
-            get
-            {
-                return this.Children.Count;
-            }
-        }
-
         public override string Location
         {
             get
             {
                 return this.Children.Select(asTree => asTree.Location)
                     .FirstOrDefault(location => !string.IsNullOrEmpty(location));
+            }
+        }
+
+        public override int NumberOfChildren
+        {
+            get
+            {
+                return this.Children.Count;
             }
         }
 
@@ -36,6 +36,21 @@ namespace Stone.AST
             return this.Children[i];
         }
 
+        public override object Eval(IEnvironment environment)
+        {
+            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+        }
+
+        public override object Eval(IEnvironment environment, object value)
+        {
+            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+        }
+
+        public override void Eval(IEnvironment environment, int index, object value)
+        {
+            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+        }
+
         public override IEnumerator<ASTree> GetChildren()
         {
             return this.Children.GetEnumerator();
@@ -44,11 +59,6 @@ namespace Stone.AST
         public override string ToString()
         {
             return "(" + string.Join(" ", this.Children) + ")";
-        }
-
-        public override object Eval(IEnvironment environment)
-        {
-            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
         }
     }
 }

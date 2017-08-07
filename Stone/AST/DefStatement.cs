@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Stone.Interpreter;
 
 namespace Stone.AST
 {
@@ -31,6 +32,13 @@ namespace Stone.AST
             {
                 return (BlockStatement)this.GetChild(2);
             }
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            environment.PutNew(this.Name, new Function(this.Parameters, this.Body, environment));
+
+            return this.Name;
         }
 
         public override string ToString()

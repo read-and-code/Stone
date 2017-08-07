@@ -2,8 +2,12 @@ namespace Stone.Interpreter
 {
     public interface IEnvironment
     {
-         void Put(string name, object value);
+        object Get(string name);
 
-         object Get(string name);
+        void Put(string name, object value);
+
+        void PutNew(string name, object value);
+
+        IEnvironment Where(string name);
     }
 }

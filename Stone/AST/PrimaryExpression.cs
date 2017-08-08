@@ -28,8 +28,9 @@ namespace Stone.AST
             if (this.HasPostfix(nest))
             {
                 object target = this.EvalSubExpression(environment, nest + 1);
+                Postfix postfix = (Postfix)this.GetPostfix(nest);
 
-                return ((Postfix)this.GetPostfix(nest)).Eval(environment, target);
+                return postfix.Eval(environment, target);
             }
             else
             {

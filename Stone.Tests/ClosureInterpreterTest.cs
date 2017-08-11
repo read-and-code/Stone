@@ -8,19 +8,19 @@ using Xunit;
 
 namespace Stone.Tests
 {
-    public class InterpreterTest
+    public class ClosureInterpreterTest
     {
         [Fact]
-        public void Interpret()
+        public void Counter()
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/interpreter.st");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/closure.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-            BasicParser basicParser = new BasicParser();
-            IEnvironment environment = new BasicEnvironment();
+            ClosureParser closureParser = new ClosureParser();
+            IEnvironment environment = new NestedEnvironment();
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTree asTree = basicParser.Parse(lexer);
+                ASTree asTree = closureParser.Parse(lexer);
 
                 if (!(asTree is NullStatement))
                 {

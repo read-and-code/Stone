@@ -13,7 +13,7 @@ namespace Stone.Tests
         [Fact]
         public void Sum()
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/sum.txt");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/sum.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             FunctionParser functionParser = new FunctionParser();
             IEnvironment environment = new NestedEnvironment();
@@ -34,7 +34,7 @@ namespace Stone.Tests
         [Fact]
         public void Fib()
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/fib.txt");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/fib.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             FunctionParser functionParser = new FunctionParser();
             IEnvironment environment = new NestedEnvironment();

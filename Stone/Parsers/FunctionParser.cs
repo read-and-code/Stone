@@ -9,8 +9,6 @@ namespace Stone.Parsers
 
         private Parser parameters;
 
-        private Parser parameterList;
-
         private Parser def;
 
         private Parser arguments;
@@ -27,12 +25,12 @@ namespace Stone.Parsers
                 .Repeat(Parser.Rule().Separator(new List<string> { "," }).Ast(this.parameter));
 
             // parameterList : "(" [ parameters ] ")"
-            this.parameterList = Parser.Rule().Separator(new List<string> { "(" })
+            this.ParameterList = Parser.Rule().Separator(new List<string> { "(" })
                 .Maybe(this.parameters).Separator(new List<string> { ")" });
 
             // def : "def" IDENTIFIER parameterList block
             this.def = Parser.Rule(typeof(DefStatement)).Separator(new List<string> { "def" })
-                .Identifier(this.ReservedKeywords).Ast(this.parameterList).Ast(this.Block);
+                .Identifier(this.ReservedKeywords).Ast(this.ParameterList).Ast(this.Block);
 
             // arguments : expression { "," expression }
             this.arguments = Parser.Rule(typeof(Arguments)).Ast(this.Expression)
@@ -52,6 +50,12 @@ namespace Stone.Parsers
 
             // program : [ def | statement ] (";" | EOL)
             this.Program.InsertChoice(this.def);
+        }
+
+        protected Parser ParameterList
+        {
+            get;
+            private set;
         }
     }
 }

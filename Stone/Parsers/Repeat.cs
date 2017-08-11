@@ -11,9 +11,17 @@ namespace Stone.Parsers
             this.OnlyOnce = onlyOnce;
         }
 
-        public Parser Parser { get; private set; }
+        public Parser Parser
+        {
+            get;
+            private set;
+        }
 
-        public bool OnlyOnce { get; private set; }
+        public bool OnlyOnce
+        {
+            get;
+            private set;
+        }
 
         public override void Parse(Lexer lexer, List<ASTree> asTrees)
         {

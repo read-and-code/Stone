@@ -9,7 +9,11 @@ namespace Stone
         {
         }
 
-        public int LineNumber { get; private set; }
+        public int LineNumber
+        {
+            get;
+            private set;
+        }
 
         public override string ReadLine()
         {

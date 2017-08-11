@@ -15,7 +15,11 @@ namespace Stone.Parsers
             }
         }
 
-        private HashSet<string> ReservedKeywords { get; set; }
+        private HashSet<string> ReservedKeywords
+        {
+            get;
+            set;
+        }
 
         public override bool Test(Token token)
         {

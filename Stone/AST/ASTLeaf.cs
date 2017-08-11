@@ -31,7 +31,11 @@ namespace Stone.AST
             }
         }
 
-        public Token Token { get; private set; }
+        public Token Token
+        {
+            get;
+            private set;
+        }
 
         public override ASTree GetChild(int i)
         {

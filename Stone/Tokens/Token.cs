@@ -12,7 +12,11 @@ namespace Stone.Tokens
             this.LineNumber = lineNumber;
         }
 
-        public int LineNumber { get; private set; }
+        public int LineNumber
+        {
+            get;
+            private set;
+        }
 
         public virtual bool IsIdentifier
         {

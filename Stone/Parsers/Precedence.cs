@@ -8,8 +8,16 @@ namespace Stone.Parsers
             this.IsLeftAssociative = isLeftAssociative;
         }
 
-        public int Value { get; set; }
+        public int Value
+        {
+            get;
+            set;
+        }
 
-        public bool IsLeftAssociative { get; set; }
+        public bool IsLeftAssociative
+        {
+            get;
+            set;
+        }
     }
 }

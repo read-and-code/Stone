@@ -6,9 +6,15 @@ namespace Stone.AST
 {
     public abstract class ASTree : IEnumerable<ASTree>
     {
-        public abstract string Location { get; }
+        public abstract string Location
+        {
+            get;
+        }
 
-        public abstract int NumberOfChildren { get; }
+        public abstract int NumberOfChildren
+        {
+            get;
+        }
 
         public abstract ASTree GetChild(int i);
 

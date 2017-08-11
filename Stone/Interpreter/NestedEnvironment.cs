@@ -15,9 +15,17 @@ namespace Stone.Interpreter
             this.Values = new Dictionary<string, object>();
         }
 
-        public IEnvironment OuterEnvironment { get; set; }
+        public IEnvironment OuterEnvironment
+        {
+            get;
+            set;
+        }
 
-        protected Dictionary<string, object> Values { get; private set; }
+        protected Dictionary<string, object> Values
+        {
+            get;
+            private set;
+        }
 
         public object Get(string name)
         {

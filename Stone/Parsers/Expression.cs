@@ -14,11 +14,23 @@ namespace Stone.Parsers
             this.Operators = operators;
         }
 
-        public Operators Operators { get; private set; }
+        public Operators Operators
+        {
+            get;
+            private set;
+        }
 
-        public Parser Factor { get; private set; }
+        public Parser Factor
+        {
+            get;
+            private set;
+        }
 
-        private Type Type { get; set; }
+        private Type Type
+        {
+            get;
+            set;
+        }
 
         public override void Parse(Lexer lexer, List<ASTree> asTrees)
         {

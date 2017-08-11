@@ -14,7 +14,11 @@ namespace Stone.Parsers
             this.Tokens = tokens;
         }
 
-        public List<string> Tokens { get; private set; }
+        public List<string> Tokens
+        {
+            get;
+            private set;
+        }
 
         public override void Parse(Lexer lexer, List<ASTree> asTrees)
         {

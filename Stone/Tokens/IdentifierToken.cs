@@ -16,7 +16,10 @@ namespace Stone.Tokens
             }
         }
 
-        public override string Text { get; }
+        public override string Text
+        {
+            get;
+        }
 
         public override string ToString()
         {

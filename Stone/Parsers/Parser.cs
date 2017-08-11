@@ -24,9 +24,17 @@ namespace Stone.Parsers
             this.Type = parser.Type;
         }
 
-        protected Type Type { get; set; }
+        protected Type Type
+        {
+            get;
+            set;
+        }
 
-        protected List<Element> Elements { get; set; }
+        protected List<Element> Elements
+        {
+            get;
+            set;
+        }
 
         public static Parser Rule()
         {

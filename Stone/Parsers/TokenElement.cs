@@ -13,7 +13,11 @@ namespace Stone.Parsers
             this.Type = type == null ? typeof(ASTLeaf) : type;
         }
 
-        protected Type Type { get; private set; }
+        protected Type Type
+        {
+            get;
+            private set;
+        }
 
         public override void Parse(Lexer lexer, List<ASTree> asTrees)
         {

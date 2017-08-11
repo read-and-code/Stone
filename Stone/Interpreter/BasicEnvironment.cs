@@ -10,7 +10,11 @@ namespace Stone.Interpreter
             this.Values = new Dictionary<string, object>();
         }
 
-        protected Dictionary<string, object> Values { get; private set; }
+        protected Dictionary<string, object> Values
+        {
+            get;
+            private set;
+        }
 
         public object Get(string name)
         {

@@ -42,17 +42,17 @@ namespace Stone.AST
 
         public override object Eval(IEnvironment environment)
         {
-            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+            throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
         public override object Eval(IEnvironment environment, object value)
         {
-            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+            throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
         public override void Eval(IEnvironment environment, int index, object value)
         {
-            throw new StoneException(string.Format("Cannot eval: {0}", this.ToString()), this);
+            throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
         public override IEnumerator<ASTree> GetChildren()

@@ -21,9 +21,14 @@ namespace Stone.AST
 
         public override object Eval(IEnvironment environment, object value)
         {
-            if (!(value is Function))
+            if (!(value is Function || value is NativeFunction))
             {
                 throw new StoneException("Bad function", this);
+            }
+
+            if (value is NativeFunction)
+            {
+                return this.EvalNativeFunction(environment, value);
             }
 
             Function function = (Function)value;
@@ -45,6 +50,26 @@ namespace Stone.AST
             }
 
             return function.Body.Eval(newEnvironment);
+        }
+
+        private object EvalNativeFunction(IEnvironment environment, object value)
+        {
+            NativeFunction nativeFunction = (NativeFunction)value;
+
+            if (this.Size != nativeFunction.NumberOfParameters)
+            {
+                throw new StoneException("Bad number of arguments", this);
+            }
+
+            int index = 0;
+            object[] arguments = new object[nativeFunction.NumberOfParameters];
+
+            foreach (ASTree asTree in this)
+            {
+                arguments[index++] = asTree.Eval(environment);
+            }
+
+            return nativeFunction.Invoke(arguments, this);
         }
     }
 }

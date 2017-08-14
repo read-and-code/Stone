@@ -14,7 +14,7 @@ namespace Stone
             @"\s*((//.*)|([0-9]+)|(""(\\""|\\\\|\\n|[^""])*"")" +
             @"|[A-Z_a-z][A-Z_a-z0-9]*|!=|==|<=|>=|&&|\+\+|--|\+|-|<|>|=|\|\||\p{P})?";
 
-        private Regex regex = new Regex(regexPattern, RegexOptions.Compiled);
+        private readonly Regex regex = new Regex(regexPattern, RegexOptions.Compiled);
 
         private List<Token> queue = new List<Token>();
 

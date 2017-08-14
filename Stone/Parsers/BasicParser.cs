@@ -42,7 +42,7 @@ namespace Stone.Parsers
             // expression : factor { OPERATOR factor }
             this.Expression = this.basicExpression.Expression(typeof(BinaryExpression), this.Factor, this.operators);
 
-            // block : "{" [ statement ] {(";" | EOL) [ statement ]} "}"
+            // block : "{" [ statement ] { (";" | EOL) [ statement ] } "}"
             this.Block = Parser.Rule(typeof(BlockStatement))
                 .Separator(new List<string> { "{" }).Option(this.basicStatement)
                 .Repeat(Parser.Rule().Separator(new List<string> { ";", Token.EOL })
@@ -60,8 +60,7 @@ namespace Stone.Parsers
                     {
                         Parser.Rule(typeof(IfStatement)).Separator(new List<string> { "if" })
                             .Ast(this.Expression).Ast(this.Block)
-                            .Option(Parser.Rule().Separator(new List<string> { "else" })
-                                .Ast(this.Block)),
+                            .Option(Parser.Rule().Separator(new List<string> { "else" }).Ast(this.Block)),
                         Parser.Rule(typeof(WhileStatement)).Separator(new List<string> { "while" })
                             .Ast(this.Expression).Ast(this.Block),
                         this.Simple,

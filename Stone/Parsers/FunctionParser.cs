@@ -9,11 +9,7 @@ namespace Stone.Parsers
 
         private Parser parameters;
 
-        private Parser def;
-
         private Parser arguments;
-
-        private Parser postfix;
 
         public FunctionParser()
         {
@@ -29,7 +25,7 @@ namespace Stone.Parsers
                 .Maybe(this.parameters).Separator(new List<string> { ")" });
 
             // def : "def" IDENTIFIER parameterList block
-            this.def = Parser.Rule(typeof(DefStatement)).Separator(new List<string> { "def" })
+            this.Def = Parser.Rule(typeof(DefStatement)).Separator(new List<string> { "def" })
                 .Identifier(this.ReservedKeywords).Ast(this.ParameterList).Ast(this.Block);
 
             // arguments : expression { "," expression }
@@ -37,22 +33,34 @@ namespace Stone.Parsers
                 .Repeat(Parser.Rule().Separator(new List<string> { "," }).Ast(this.Expression));
 
             // postfix : "(" [ arguments ] ")"
-            this.postfix = Parser.Rule().Separator(new List<string> { "(" })
+            this.Postfix = Parser.Rule().Separator(new List<string> { "(" })
                 .Maybe(this.arguments).Separator(new List<string> { ")" });
 
             this.ReservedKeywords.Add(")");
 
             // primary : ( "(" expression ")" | NUMBER | IDENTIFIER | STRING ) { postfix }
-            this.Primary.Repeat(this.postfix);
+            this.Primary.Repeat(this.Postfix);
 
             // simple : expression [ arguments ]
             this.Simple.Option(this.arguments);
 
             // program : [ def | statement ] (";" | EOL)
-            this.Program.InsertChoice(this.def);
+            this.Program.InsertChoice(this.Def);
         }
 
         protected Parser ParameterList
+        {
+            get;
+            private set;
+        }
+
+        protected Parser Def
+        {
+            get;
+            private set;
+        }
+
+        protected Parser Postfix
         {
             get;
             private set;

@@ -7,6 +7,7 @@ namespace Stone.Parsers
     {
         public ClosureParser()
         {
+            // primary : ( "(" expression ")" | NUMBER | IDENTIFIER | STRING ) { postfix } | " fun " parameterList block
             this.Primary.InsertChoice(
                 Parser.Rule(typeof(AnonymousFunction)).Separator(new List<string> { "fun" })
                 .Ast(this.ParameterList).Ast(this.Block));

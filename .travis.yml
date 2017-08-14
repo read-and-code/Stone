@@ -1,0 +1,16 @@
+language: csharp
+mono: none
+dotnet: 1.0.4
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+    - os: osx
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ulimit -n 1024; fi
+install:
+  - make restore
+before_script:
+  - make build
+script:
+ - make test

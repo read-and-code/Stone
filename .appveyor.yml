@@ -1,0 +1,16 @@
+image: Visual Studio 2017
+environment:
+  PROJECT_FILE: ./Stone/Stone.csproj
+  TEST_PROJECT_FILE: ./Stone.Tests/Stone.Tests.csproj
+  CODECOV_REPO_TOKEN:
+    secure: zUv91b6j7edtiFjD8iMa6hRT/VoXk/0SuF6B472VEA49jpd+lp7D/D3ylAP6999V
+install:
+  - cmd: dotnet restore %PROJECT_FILE%
+  - cmd: dotnet restore %TEST_PROJECT_FILE%
+build_script:
+  - cmd: dotnet build %PROJECT_FILE%
+  - cmd: dotnet build %TEST_PROJECT_FILE%
+test_script:
+  - cmd: dotnet test %TEST_PROJECT_FILE%
+  - bash coverage.sh
+  - bash codecov.sh

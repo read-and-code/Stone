@@ -16,13 +16,13 @@ namespace Stone.Parsers
         {
             get
             {
-                return true;
+                return false;
             }
         }
 
-        public void Put(string name, int precedenceValue, bool leftAssociative)
+        public void Put(string name, int precedenceValue, bool isLeftAssociative)
         {
-            this.Add(name, new Precedence(precedenceValue, leftAssociative));
+            this.Add(name, new Precedence(precedenceValue, isLeftAssociative));
         }
     }
 }

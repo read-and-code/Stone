@@ -13,7 +13,6 @@ namespace Stone.Interpreter
         protected Dictionary<string, object> Values
         {
             get;
-            private set;
         }
 
         public object Get(string name)

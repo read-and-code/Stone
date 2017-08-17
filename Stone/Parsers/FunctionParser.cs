@@ -51,19 +51,16 @@ namespace Stone.Parsers
         protected Parser ParameterList
         {
             get;
-            private set;
         }
 
         protected Parser Def
         {
             get;
-            private set;
         }
 
         protected Parser Postfix
         {
             get;
-            private set;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Stone.Tokens
         public int LineNumber
         {
             get;
-            private set;
         }
 
         public virtual bool IsIdentifier

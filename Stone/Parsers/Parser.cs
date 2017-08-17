@@ -219,7 +219,7 @@ namespace Stone.Parsers
             }
             else
             {
-                Parser otherwise = new Parser(parser.Type);
+                Parser otherwise = new Parser(this);
 
                 this.Elements = new List<Element>();
                 this.Or(new List<Parser> { parser, otherwise });

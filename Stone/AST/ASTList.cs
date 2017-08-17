@@ -32,7 +32,6 @@ namespace Stone.AST
         protected List<ASTree> Children
         {
             get;
-            private set;
         }
 
         public override ASTree GetChild(int i)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Stone.Interpreter;
 
 namespace Stone.AST
 {
@@ -38,6 +39,15 @@ namespace Stone.AST
             {
                 return (ClassBody)this.GetChild(this.NumberOfChildren - 1);
             }
+        }
+
+        public override object Eval(IEnvironment environment)
+        {
+            ClassInfo classInfo = new ClassInfo(this, environment);
+
+            environment.Put(this.Name, classInfo);
+
+            return this.Name;
         }
 
         public override string ToString()

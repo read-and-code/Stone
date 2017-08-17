@@ -89,49 +89,41 @@ namespace Stone.Parsers
         protected Parser Primary
         {
             get;
-            private set;
         }
 
         protected Parser Factor
         {
             get;
-            private set;
         }
 
         protected Parser Expression
         {
             get;
-            private set;
         }
 
         protected Parser Block
         {
             get;
-            private set;
         }
 
         protected Parser Simple
         {
             get;
-            private set;
         }
 
         protected Parser Statement
         {
             get;
-            private set;
         }
 
         protected Parser Program
         {
             get;
-            private set;
         }
 
         protected HashSet<string> ReservedKeywords
         {
             get;
-            private set;
         }
 
         public ASTree Parse(Lexer lexer)

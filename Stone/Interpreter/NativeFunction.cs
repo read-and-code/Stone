@@ -17,19 +17,16 @@ namespace Stone.Interpreter
         public string Name
         {
             get;
-            private set;
         }
 
         public MethodInfo MethodInfo
         {
             get;
-            private set;
         }
 
         public int NumberOfParameters
         {
             get;
-            private set;
         }
 
         public object Invoke(object[] arguments, ASTree asTree)

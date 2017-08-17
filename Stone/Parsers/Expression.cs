@@ -17,13 +17,11 @@ namespace Stone.Parsers
         public Operators Operators
         {
             get;
-            private set;
         }
 
         public Parser Factor
         {
             get;
-            private set;
         }
 
         private Type Type

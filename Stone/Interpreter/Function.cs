@@ -14,19 +14,16 @@ namespace Stone.Interpreter
         public ParameterList Parameters
         {
             get;
-            private set;
         }
 
         public BlockStatement Body
         {
             get;
-            private set;
         }
 
         protected IEnvironment Environment
         {
             get;
-            private set;
         }
 
         public IEnvironment MakeEnvironment()

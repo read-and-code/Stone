@@ -15,7 +15,6 @@ namespace Stone.Parsers
         public List<Parser> Parsers
         {
             get;
-            private set;
         }
 
         public override void Parse(Lexer lexer, List<ASTree> asTrees)

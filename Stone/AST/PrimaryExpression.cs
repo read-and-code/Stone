@@ -23,7 +23,7 @@ namespace Stone.AST
             return this.EvalSubExpression(environment, 0);
         }
 
-        private object EvalSubExpression(IEnvironment environment, int nest)
+        public object EvalSubExpression(IEnvironment environment, int nest)
         {
             if (this.HasPostfix(nest))
             {
@@ -38,12 +38,12 @@ namespace Stone.AST
             }
         }
 
-        private Postfix GetPostfix(int nest)
+        public Postfix GetPostfix(int nest)
         {
             return (Postfix)this.GetChild(this.NumberOfChildren - nest - 1);
         }
 
-        private bool HasPostfix(int nest)
+        public bool HasPostfix(int nest)
         {
             return this.NumberOfChildren - nest > 1;
         }

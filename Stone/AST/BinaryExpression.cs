@@ -54,15 +54,32 @@ namespace Stone.AST
             }
         }
 
-        private object ComputeAssignment(IEnvironment environment, object value)
+        private object ComputeAssignment(IEnvironment environment, object rightValue)
         {
             ASTree left = this.Left;
 
+            if (left is PrimaryExpression)
+            {
+                PrimaryExpression primaryExpression = (PrimaryExpression)left;
+
+                if (primaryExpression.HasPostfix(0) && primaryExpression.GetPostfix(0) is Dot)
+                {
+                    object stoneObject = primaryExpression.EvalSubExpression(environment, 1);
+
+                    if (stoneObject is StoneObject)
+                    {
+                        this.SetField((StoneObject)stoneObject, (Dot)primaryExpression.GetPostfix(0), rightValue);
+
+                        return rightValue;
+                    }
+                }
+            }
+
             if (left is Name)
             {
-                environment.Put((left as Name).Value, value);
+                environment.Put((left as Name).Value, rightValue);
 
-                return value;
+                return rightValue;
             }
             else
             {
@@ -110,6 +127,20 @@ namespace Stone.AST
                     return left < right ? 1 : 0;
                 default:
                     throw new StoneException("Bad operator", this);
+            }
+        }
+
+        private void SetField(StoneObject stoneObject, Dot expression, object rightValue)
+        {
+            string name = expression.Name;
+
+            try
+            {
+                stoneObject.Write(name, rightValue);
+            }
+            catch
+            {
+                throw new StoneException(string.Format("Bad member access {0}: {1}", this.Location, name));
             }
         }
     }

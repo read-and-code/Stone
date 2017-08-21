@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Stone.Exceptions;
 using Stone.Interpreter;
 

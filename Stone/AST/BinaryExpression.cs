@@ -73,6 +73,25 @@ namespace Stone.AST
                         return rightValue;
                     }
                 }
+                else if (primaryExpression.HasPostfix(0) && primaryExpression.GetPostfix(0) is ArrayReference)
+                {
+                    object array = primaryExpression.EvalSubExpression(environment, 1);
+
+                    if (array is object[])
+                    {
+                        ArrayReference arrayReference = (ArrayReference)primaryExpression.GetPostfix(0);
+                        object index = arrayReference.Index.Eval(environment);
+
+                        if (index is int)
+                        {
+                            ((object[])array)[Convert.ToInt32(index)] = rightValue;
+
+                            return rightValue;
+                        }
+                    }
+
+                    throw new StoneException("Bad array access", this);
+                }
             }
 
             if (left is Name)

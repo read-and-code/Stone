@@ -4,14 +4,14 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class WhileStatement : ASTList
+    public class WhileStatement : ASTBranchNode
     {
-        public WhileStatement(List<ASTree> asTrees)
-            : base(asTrees)
+        public WhileStatement(List<ASTNode> children)
+            : base(children)
         {
         }
 
-        public ASTree Condition
+        public ASTNode Condition
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTree Body
+        public ASTNode Body
         {
             get
             {

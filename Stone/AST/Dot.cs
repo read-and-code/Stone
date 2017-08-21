@@ -6,8 +6,8 @@ namespace Stone.AST
 {
     public class Dot : Postfix
     {
-        public Dot(List<ASTree> asTrees)
-            : base(asTrees)
+        public Dot(List<ASTNode> children)
+            : base(children)
         {
         }
 

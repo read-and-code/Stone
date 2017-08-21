@@ -3,14 +3,14 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class PrimaryExpression : ASTList
+    public class PrimaryExpression : ASTBranchNode
     {
-        public PrimaryExpression(List<ASTree> asTrees)
-            : base(asTrees)
+        public PrimaryExpression(List<ASTNode> children)
+            : base(children)
         {
         }
 
-        public ASTree Operand
+        public ASTNode Operand
         {
             get
             {

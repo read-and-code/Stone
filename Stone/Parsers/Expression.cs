@@ -30,9 +30,9 @@ namespace Stone.Parsers
             set;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
-            ASTree right = this.Factor.Parse(lexer);
+            ASTNode right = this.Factor.Parse(lexer);
             Precedence precedence = this.NextOperator(lexer);
 
             while (precedence != null)
@@ -42,7 +42,7 @@ namespace Stone.Parsers
                 precedence = this.NextOperator(lexer);
             }
 
-            asTrees.Add(right);
+            astNodes.Add(right);
         }
 
         public override bool Match(Lexer lexer)
@@ -76,13 +76,13 @@ namespace Stone.Parsers
             }
         }
 
-        private ASTree DoShift(Lexer lexer, ASTree left, int precedenceValue)
+        private ASTNode DoShift(Lexer lexer, ASTNode left, int precedenceValue)
         {
-            List<ASTree> asTrees = new List<ASTree>();
-            asTrees.Add(left);
-            asTrees.Add(new ASTLeaf(lexer.Read()));
+            List<ASTNode> astNodes = new List<ASTNode>();
+            astNodes.Add(left);
+            astNodes.Add(new ASTLeaf(lexer.Read()));
 
-            ASTree right = this.Factor.Parse(lexer);
+            ASTNode right = this.Factor.Parse(lexer);
             Precedence nextPrecedence = this.NextOperator(lexer);
 
             while (nextPrecedence != null && IsRightExpression(precedenceValue, nextPrecedence))
@@ -92,9 +92,9 @@ namespace Stone.Parsers
                 nextPrecedence = this.NextOperator(lexer);
             }
 
-            asTrees.Add(right);
+            astNodes.Add(right);
 
-            return ASTreeFactory.Make(this.Type, new[] { asTrees });
+            return ASTNodeFactory.Make(this.Type, new[] { astNodes });
         }
     }
 }

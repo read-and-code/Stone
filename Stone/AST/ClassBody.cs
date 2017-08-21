@@ -4,18 +4,18 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class ClassBody : ASTList
+    public class ClassBody : ASTBranchNode
     {
-        public ClassBody(List<ASTree> asTrees)
-            : base(asTrees)
+        public ClassBody(List<ASTNode> children)
+            : base(children)
         {
         }
 
         public override object Eval(IEnvironment environment)
         {
-            foreach (ASTree asTree in this)
+            foreach (ASTNode astNode in this)
             {
-                asTree.Eval(environment);
+                astNode.Eval(environment);
             }
 
             return null;

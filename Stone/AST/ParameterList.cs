@@ -3,10 +3,10 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class ParameterList : ASTList
+    public class ParameterList : ASTBranchNode
     {
-        public ParameterList(List<ASTree> asTrees)
-            : base(asTrees)
+        public ParameterList(List<ASTNode> children)
+            : base(children)
         {
         }
 

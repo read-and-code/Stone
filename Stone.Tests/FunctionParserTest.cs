@@ -18,9 +18,9 @@ namespace Stone.Tests
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTree asTree = functionParser.Parse(lexer);
+                ASTNode astNode = functionParser.Parse(lexer);
 
-                System.Console.WriteLine(asTree.ToString());
+                System.Console.WriteLine(astNode.ToString());
             }
         }
     }

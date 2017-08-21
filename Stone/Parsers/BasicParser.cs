@@ -126,7 +126,7 @@ namespace Stone.Parsers
             get;
         }
 
-        public ASTree Parse(Lexer lexer)
+        public ASTNode Parse(Lexer lexer)
         {
             return this.Program.Parse(lexer);
         }

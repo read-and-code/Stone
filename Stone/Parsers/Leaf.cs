@@ -19,7 +19,7 @@ namespace Stone.Parsers
             get;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
             Token token = lexer.Read();
 
@@ -29,7 +29,7 @@ namespace Stone.Parsers
                 {
                     if (t.Equals(token.Text))
                     {
-                        this.Find(asTrees, token);
+                        this.Find(astNodes, token);
 
                         return;
                     }
@@ -60,9 +60,9 @@ namespace Stone.Parsers
             }
         }
 
-        protected virtual void Find(List<ASTree> asTrees, Token token)
+        protected virtual void Find(List<ASTNode> astNodes, Token token)
         {
-            asTrees.Add(new ASTLeaf(token));
+            astNodes.Add(new ASTLeaf(token));
         }
     }
 }

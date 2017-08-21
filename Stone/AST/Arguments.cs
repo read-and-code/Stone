@@ -7,8 +7,8 @@ namespace Stone.AST
 {
     public class Arguments : Postfix
     {
-        public Arguments(List<ASTree> asTrees)
-            : base(asTrees)
+        public Arguments(List<ASTNode> children)
+            : base(children)
         {
         }
 
@@ -43,9 +43,9 @@ namespace Stone.AST
             int index = 0;
             IEnvironment newEnvironment = function.MakeEnvironment();
 
-            foreach (ASTree asTree in this)
+            foreach (ASTNode astNode in this)
             {
-                parameters.Eval(newEnvironment, index, asTree.Eval(environment));
+                parameters.Eval(newEnvironment, index, astNode.Eval(environment));
 
                 index++;
             }
@@ -65,9 +65,9 @@ namespace Stone.AST
             int index = 0;
             object[] arguments = new object[nativeFunction.NumberOfParameters];
 
-            foreach (ASTree asTree in this)
+            foreach (ASTNode astNode in this)
             {
-                arguments[index++] = asTree.Eval(environment);
+                arguments[index++] = astNode.Eval(environment);
             }
 
             return nativeFunction.Invoke(arguments, this);

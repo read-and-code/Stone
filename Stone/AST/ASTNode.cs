@@ -4,7 +4,7 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public abstract class ASTree : IEnumerable<ASTree>
+    public abstract class ASTNode : IEnumerable<ASTNode>
     {
         public abstract string Location
         {
@@ -16,7 +16,7 @@ namespace Stone.AST
             get;
         }
 
-        public abstract ASTree GetChild(int i);
+        public abstract ASTNode GetChild(int i);
 
         public abstract object Eval(IEnvironment environment);
 
@@ -24,9 +24,9 @@ namespace Stone.AST
 
         public abstract void Eval(IEnvironment environment, int index, object value);
 
-        public abstract IEnumerator<ASTree> GetChildren();
+        public abstract IEnumerator<ASTNode> GetChildren();
 
-        public IEnumerator<ASTree> GetEnumerator()
+        public IEnumerator<ASTNode> GetEnumerator()
         {
             return this.GetChildren();
         }

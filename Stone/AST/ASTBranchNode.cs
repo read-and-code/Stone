@@ -5,9 +5,9 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class ASTList : ASTree
+    public class ASTBranchNode : ASTNode
     {
-        public ASTList(List<ASTree> children)
+        public ASTBranchNode(List<ASTNode> children)
         {
             this.Children = children;
         }
@@ -16,7 +16,7 @@ namespace Stone.AST
         {
             get
             {
-                return this.Children.Select(asTree => asTree.Location)
+                return this.Children.Select(child => child.Location)
                     .FirstOrDefault(location => !string.IsNullOrEmpty(location));
             }
         }
@@ -29,12 +29,12 @@ namespace Stone.AST
             }
         }
 
-        protected List<ASTree> Children
+        protected List<ASTNode> Children
         {
             get;
         }
 
-        public override ASTree GetChild(int i)
+        public override ASTNode GetChild(int i)
         {
             return this.Children[i];
         }
@@ -54,7 +54,7 @@ namespace Stone.AST
             throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
-        public override IEnumerator<ASTree> GetChildren()
+        public override IEnumerator<ASTNode> GetChildren()
         {
             return this.Children.GetEnumerator();
         }

@@ -3,10 +3,10 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class BlockStatement : ASTList
+    public class BlockStatement : ASTBranchNode
     {
-        public BlockStatement(List<ASTree> asTrees)
-            : base(asTrees)
+        public BlockStatement(List<ASTNode> children)
+            : base(children)
         {
         }
 
@@ -14,11 +14,11 @@ namespace Stone.AST
         {
             object result = 0;
 
-            foreach (ASTree asTree in this)
+            foreach (ASTNode astNode in this)
             {
-                if (!(asTree is NullStatement))
+                if (!(astNode is NullStatement))
                 {
-                    result = asTree.Eval(environment);
+                    result = astNode.Eval(environment);
                 }
             }
 

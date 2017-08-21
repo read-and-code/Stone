@@ -7,12 +7,12 @@ namespace Stone.AST
 {
     public class ArrayReference : Postfix
     {
-        public ArrayReference(List<ASTree> asTrees)
-            : base(asTrees)
+        public ArrayReference(List<ASTNode> children)
+            : base(children)
         {
         }
 
-        public ASTree Index
+        public ASTNode Index
         {
             get
             {

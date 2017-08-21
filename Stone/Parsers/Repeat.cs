@@ -21,15 +21,15 @@ namespace Stone.Parsers
             get;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
             while (this.Parser.Match(lexer))
             {
-                ASTree asTree = this.Parser.Parse(lexer);
+                ASTNode astNode = this.Parser.Parse(lexer);
 
-                if (asTree.GetType().Name != typeof(ASTList).Name || asTree.NumberOfChildren > 0)
+                if (astNode.GetType().Name != typeof(ASTBranchNode).Name || astNode.NumberOfChildren > 0)
                 {
-                    asTrees.Add(asTree);
+                    astNodes.Add(astNode);
                 }
 
                 if (this.OnlyOnce)

@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace Stone.Interpreter
 {
-    public class NestedEnvironment : IEnvironment
+    public class Environment : IEnvironment
     {
-        public NestedEnvironment()
+        public Environment()
             : this(null)
         {
         }
 
-        public NestedEnvironment(IEnvironment environment)
+        public Environment(IEnvironment environment)
         {
             this.OuterEnvironment = environment;
             this.Values = new Dictionary<string, object>();

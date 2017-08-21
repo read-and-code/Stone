@@ -16,7 +16,7 @@ namespace Stone.Tests
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/sum.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             FunctionParser functionParser = new FunctionParser();
-            IEnvironment environment = new NestedEnvironment();
+            IEnvironment environment = new Environment();
 
             while (lexer.Peek(0) != Token.EOF)
             {
@@ -37,7 +37,7 @@ namespace Stone.Tests
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/fib.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             FunctionParser functionParser = new FunctionParser();
-            IEnvironment environment = new NestedEnvironment();
+            IEnvironment environment = new Environment();
 
             while (lexer.Peek(0) != Token.EOF)
             {

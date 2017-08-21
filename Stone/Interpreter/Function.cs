@@ -28,7 +28,7 @@ namespace Stone.Interpreter
 
         public IEnvironment MakeEnvironment()
         {
-            return new NestedEnvironment(this.Environment);
+            return new Environment(this.Environment);
         }
 
         public override string ToString()

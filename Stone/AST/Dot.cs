@@ -26,12 +26,12 @@ namespace Stone.AST
             if (value is ClassInfo && memberName == "new")
             {
                 ClassInfo classInfo = (ClassInfo)value;
-                NestedEnvironment nestedEnvironment = new NestedEnvironment(classInfo.Environment);
-                StoneObject stoneObject = new StoneObject(nestedEnvironment);
+                Environment innerEnvironment = new Environment(classInfo.Environment);
+                StoneObject stoneObject = new StoneObject(innerEnvironment);
 
-                nestedEnvironment.PutNew("this", stoneObject);
+                innerEnvironment.PutNew("this", stoneObject);
 
-                this.InitializeObject(classInfo, nestedEnvironment);
+                this.InitializeObject(classInfo, innerEnvironment);
 
                 return stoneObject;
             }

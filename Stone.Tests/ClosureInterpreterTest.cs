@@ -16,7 +16,7 @@ namespace Stone.Tests
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/closure.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             ClosureParser closureParser = new ClosureParser();
-            IEnvironment environment = new NestedEnvironment();
+            IEnvironment environment = new Environment();
 
             while (lexer.Peek(0) != Token.EOF)
             {

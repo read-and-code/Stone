@@ -15,12 +15,12 @@ namespace Stone.Tests
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/array.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-            ArrayParser arrayParser = new ArrayParser();
+            BasicParser basicParser = new BasicParser();
             IEnvironment environment = new NativeMethods().GetEnvironment(new Environment());
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTNode astNode = arrayParser.Parse(lexer);
+                ASTNode astNode = basicParser.Parse(lexer);
 
                 if (!(astNode is NullStatement))
                 {

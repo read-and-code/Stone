@@ -14,11 +14,11 @@ namespace Stone.Tests
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/lexer3.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-            FunctionParser functionParser = new FunctionParser();
+            BasicParser basicParser = new BasicParser();
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTNode astNode = functionParser.Parse(lexer);
+                ASTNode astNode = basicParser.Parse(lexer);
 
                 System.Console.WriteLine(astNode.ToString());
             }

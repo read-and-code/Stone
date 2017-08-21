@@ -15,12 +15,12 @@ namespace Stone.Tests
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/closure.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-            ClosureParser closureParser = new ClosureParser();
+            BasicParser basicParser = new BasicParser();
             IEnvironment environment = new Environment();
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTNode astNode = closureParser.Parse(lexer);
+                ASTNode astNode = basicParser.Parse(lexer);
 
                 if (!(astNode is NullStatement))
                 {

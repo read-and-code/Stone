@@ -3,14 +3,14 @@ using Stone.AST;
 
 namespace Stone.Parsers
 {
-    public class ClosureParser : FunctionParser
+    public partial class BasicParser
     {
-        public ClosureParser()
+        private void InitializeClosureGrammar()
         {
             // primary : ( "(" expression ")" | NUMBER | IDENTIFIER | STRING ) { postfix } | "fun" parameterList block
-            this.Primary.InsertChoice(
+            this.primary.InsertChoice(
                 Parser.Rule(typeof(AnonymousFunction)).Separator(new List<string> { "fun" })
-                .Ast(this.ParameterList).Ast(this.Block));
+                .Ast(this.parameterList).Ast(this.block));
         }
     }
 }

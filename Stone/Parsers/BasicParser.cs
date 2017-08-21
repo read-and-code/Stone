@@ -4,7 +4,7 @@ using Stone.Tokens;
 
 namespace Stone.Parsers
 {
-    public class BasicParser
+    public partial class BasicParser
     {
         private Operators operators = new Operators();
 
@@ -12,65 +12,81 @@ namespace Stone.Parsers
 
         private Parser basicStatement = Parser.Rule();
 
+        private Parser primary;
+
+        private Parser factor;
+
+        private Parser expression;
+
+        private Parser block;
+
+        private Parser simple;
+
+        private Parser statement;
+
+        private Parser program;
+
+        private HashSet<string> reservedKeywords;
+
         public BasicParser()
         {
-            this.ReservedKeywords = new HashSet<string>();
-            this.ReservedKeywords.Add(";");
-            this.ReservedKeywords.Add("}");
-            this.ReservedKeywords.Add(Token.EOL);
+            this.reservedKeywords = new HashSet<string>();
+            this.reservedKeywords.Add(";");
+            this.reservedKeywords.Add("}");
+            this.reservedKeywords.Add(Token.EOL);
 
             // primary : "(" expression ")" | NUMBER | IDENTIFIER | STRING
-            this.Primary = Parser.Rule(typeof(PrimaryExpression))
+            this.primary = Parser.Rule(typeof(PrimaryExpression))
                 .Or(new List<Parser>
                     {
                         Parser.Rule().Separator(new List<string> { "(" }).Ast(this.basicExpression)
                             .Separator(new List<string> { ")" }),
                         Parser.Rule().Number(typeof(NumberLiteral)),
-                        Parser.Rule().Identifier(typeof(Name), this.ReservedKeywords),
+                        Parser.Rule().Identifier(typeof(Name), this.reservedKeywords),
                         Parser.Rule().String(typeof(StringLiteral)),
                     });
 
             // factor : "-" primary | primary
-            this.Factor = Parser.Rule()
+            this.factor = Parser.Rule()
                 .Or(new List<Parser>
                     {
                         Parser.Rule(typeof(NegativeExpression)).Separator(new List<string> { "-" })
-                            .Ast(this.Primary),
-                        this.Primary,
+                            .Ast(this.primary),
+                        this.primary,
                     });
 
             // expression : factor { OPERATOR factor }
-            this.Expression = this.basicExpression.Expression(typeof(BinaryExpression), this.Factor, this.operators);
+            this.expression = this.basicExpression.Expression(typeof(BinaryExpression), this.factor, this.operators);
 
             // block : "{" [ statement ] { (";" | EOL) [ statement ] } "}"
-            this.Block = Parser.Rule(typeof(BlockStatement))
+            this.block = Parser.Rule(typeof(BlockStatement))
                 .Separator(new List<string> { "{" }).Option(this.basicStatement)
                 .Repeat(Parser.Rule().Separator(new List<string> { ";", Token.EOL })
                     .Option(this.basicStatement))
                 .Separator(new List<string> { "}" });
 
             // expression
-            this.Simple = Parser.Rule(typeof(PrimaryExpression)).Ast(this.Expression);
+            this.simple = Parser.Rule(typeof(PrimaryExpression)).Ast(this.expression);
 
             // statement : "if" expression block [ "else" block ]
             //           | "while" expression block
             //           | simple
-            this.Statement = this.basicStatement
+            this.statement = this.basicStatement
                 .Or(new List<Parser>
                     {
                         Parser.Rule(typeof(IfStatement)).Separator(new List<string> { "if" })
-                            .Ast(this.Expression).Ast(this.Block)
-                            .Option(Parser.Rule().Separator(new List<string> { "else" }).Ast(this.Block)),
+                            .Ast(this.expression).Ast(this.block)
+                            .Option(Parser.Rule().Separator(new List<string> { "else" }).Ast(this.block)),
                         Parser.Rule(typeof(WhileStatement)).Separator(new List<string> { "while" })
-                            .Ast(this.Expression).Ast(this.Block),
-                        this.Simple,
+                            .Ast(this.expression).Ast(this.block),
+                        this.simple,
                     });
 
             // program : [ statement ] (";" | EOL)
-            this.Program = Parser.Rule()
+            this.program = Parser.Rule()
                 .Or(new List<Parser>
                     {
-                        this.Statement,
+                        this.statement,
                         Parser.Rule(typeof(NullStatement)),
                     })
                 .Separator(new List<string> { ";", Token.EOL });
@@ -84,51 +100,16 @@ namespace Stone.Parsers
             this.operators.Put("*", 4, Operators.Left);
             this.operators.Put("/", 4, Operators.Left);
             this.operators.Put("%", 4, Operators.Left);
-        }
 
-        protected Parser Primary
-        {
-            get;
-        }
-
-        protected Parser Factor
-        {
-            get;
-        }
-
-        protected Parser Expression
-        {
-            get;
-        }
-
-        protected Parser Block
-        {
-            get;
-        }
-
-        protected Parser Simple
-        {
-            get;
-        }
-
-        protected Parser Statement
-        {
-            get;
-        }
-
-        protected Parser Program
-        {
-            get;
-        }
-
-        protected HashSet<string> ReservedKeywords
-        {
-            get;
+            this.InitializeFunctionGrammar();
+            this.InitializeClosureGrammar();
+            this.InitializeClassGrammar();
+            this.InitializeArrayGrammar();
         }
 
         public ASTNode Parse(Lexer lexer)
         {
-            return this.Program.Parse(lexer);
+            return this.program.Parse(lexer);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Stone.Parsers
             get;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
             Parser parser = this.Choose(lexer);
 
@@ -27,7 +27,7 @@ namespace Stone.Parsers
             }
             else
             {
-                asTrees.Add(parser.Parse(lexer));
+                astNodes.Add(parser.Parse(lexer));
             }
         }
 

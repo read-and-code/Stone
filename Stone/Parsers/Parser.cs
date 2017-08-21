@@ -46,40 +46,40 @@ namespace Stone.Parsers
             return new Parser(type);
         }
 
-        public ASTree Parse(Lexer lexer)
+        public ASTNode Parse(Lexer lexer)
         {
-            List<ASTree> asTrees = new List<ASTree>();
+            List<ASTNode> astNodes = new List<ASTNode>();
 
             foreach (Element element in this.Elements)
             {
-                element.Parse(lexer, asTrees);
+                element.Parse(lexer, astNodes);
             }
 
             if (this.Type == null)
             {
-                if (asTrees.Count == 1)
+                if (astNodes.Count == 1)
                 {
-                    return asTrees[0];
+                    return astNodes[0];
                 }
                 else
                 {
-                    return new ASTList(asTrees);
+                    return new ASTBranchNode(astNodes);
                 }
             }
             else if (this.Type == typeof(PrimaryExpression))
             {
-                if (asTrees.Count == 1)
+                if (astNodes.Count == 1)
                 {
-                    return asTrees[0];
+                    return astNodes[0];
                 }
                 else
                 {
-                    return new PrimaryExpression(asTrees);
+                    return new PrimaryExpression(astNodes);
                 }
             }
             else
             {
-                return ASTreeFactory.Make(this.Type, new[] { asTrees });
+                return ASTNodeFactory.Make(this.Type, new[] { astNodes });
             }
         }
 

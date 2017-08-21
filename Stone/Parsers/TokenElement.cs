@@ -18,15 +18,15 @@ namespace Stone.Parsers
             get;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
             Token token = lexer.Read();
 
             if (this.Test(token))
             {
-                ASTree asTree = ASTreeFactory.Make(this.Type, new[] { token });
+                ASTNode astNode = ASTNodeFactory.Make(this.Type, new[] { token });
 
-                asTrees.Add(asTree);
+                astNodes.Add(astNode);
             }
             else
             {

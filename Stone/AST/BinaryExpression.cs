@@ -6,14 +6,14 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class BinaryExpression : ASTList
+    public class BinaryExpression : ASTBranchNode
     {
-        public BinaryExpression(List<ASTree> children)
+        public BinaryExpression(List<ASTNode> children)
             : base(children)
         {
         }
 
-        public ASTree Left
+        public ASTNode Left
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTree Right
+        public ASTNode Right
         {
             get
             {
@@ -56,7 +56,7 @@ namespace Stone.AST
 
         private object ComputeAssignment(IEnvironment environment, object rightValue)
         {
-            ASTree left = this.Left;
+            ASTNode left = this.Left;
 
             if (left is PrimaryExpression)
             {

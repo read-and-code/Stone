@@ -5,14 +5,14 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class NegativeExpression : ASTList
+    public class NegativeExpression : ASTBranchNode
     {
-        public NegativeExpression(List<ASTree> asTrees)
-            : base(asTrees)
+        public NegativeExpression(List<ASTNode> children)
+            : base(children)
         {
         }
 
-        public ASTree Operand
+        public ASTNode Operand
         {
             get
             {

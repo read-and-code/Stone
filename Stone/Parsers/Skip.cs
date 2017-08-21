@@ -11,7 +11,7 @@ namespace Stone.Parsers
         {
         }
 
-        protected override void Find(List<ASTree> asTrees, Token token)
+        protected override void Find(List<ASTNode> astNodes, Token token)
         {
         }
     }

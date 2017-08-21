@@ -15,9 +15,9 @@ namespace Stone.Parsers
             get;
         }
 
-        public override void Parse(Lexer lexer, List<ASTree> asTrees)
+        public override void Parse(Lexer lexer, List<ASTNode> astNodes)
         {
-            asTrees.Add(this.Parser.Parse(lexer));
+            astNodes.Add(this.Parser.Parse(lexer));
         }
 
         public override bool Match(Lexer lexer)

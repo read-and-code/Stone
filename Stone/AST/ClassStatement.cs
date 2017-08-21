@@ -3,10 +3,10 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class ClassStatement : ASTList
+    public class ClassStatement : ASTBranchNode
     {
-        public ClassStatement(List<ASTree> asTrees)
-            : base(asTrees)
+        public ClassStatement(List<ASTNode> children)
+            : base(children)
         {
         }
 

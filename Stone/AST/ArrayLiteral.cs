@@ -3,10 +3,10 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class ArrayLiteral : ASTList
+    public class ArrayLiteral : ASTBranchNode
     {
-        public ArrayLiteral(List<ASTree> asTrees)
-            : base(asTrees)
+        public ArrayLiteral(List<ASTNode> children)
+            : base(children)
         {
         }
 
@@ -24,9 +24,9 @@ namespace Stone.AST
             int size = this.NumberOfChildren;
             object[] array = new object[size];
 
-            foreach (ASTree asTree in this)
+            foreach (ASTNode astNode in this)
             {
-                array[i++] = asTree.Eval(environment);
+                array[i++] = astNode.Eval(environment);
             }
 
             return array;

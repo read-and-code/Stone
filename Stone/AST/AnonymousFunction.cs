@@ -3,10 +3,10 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class AnonymousFunction : ASTList
+    public class AnonymousFunction : ASTBranchNode
     {
-        public AnonymousFunction(List<ASTree> asTrees)
-            : base(asTrees)
+        public AnonymousFunction(List<ASTNode> children)
+            : base(children)
         {
         }
 

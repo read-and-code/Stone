@@ -4,14 +4,14 @@ using Stone.Interpreter;
 
 namespace Stone.AST
 {
-    public class IfStatement : ASTList
+    public class IfStatement : ASTBranchNode
     {
-        public IfStatement(List<ASTree> asTrees)
-            : base(asTrees)
+        public IfStatement(List<ASTNode> children)
+            : base(children)
         {
         }
 
-        public ASTree Condition
+        public ASTNode Condition
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTree ThenBlock
+        public ASTNode ThenBlock
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTree ElseBlock
+        public ASTNode ElseBlock
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Stone.AST
             }
             else
             {
-                ASTree body = this.ElseBlock;
+                ASTNode body = this.ElseBlock;
 
                 if (body == null)
                 {

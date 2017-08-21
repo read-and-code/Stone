@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace Stone.AST
 {
-    public class Postfix : ASTList
+    public class Postfix : ASTBranchNode
     {
-        public Postfix(List<ASTree> asTrees)
-            : base(asTrees)
+        public Postfix(List<ASTNode> children)
+            : base(children)
         {
         }
     }

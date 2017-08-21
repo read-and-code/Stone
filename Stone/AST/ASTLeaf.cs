@@ -6,9 +6,9 @@ using Stone.Tokens;
 
 namespace Stone.AST
 {
-    public class ASTLeaf : ASTree
+    public class ASTLeaf : ASTNode
     {
-        private static List<ASTree> empty = new List<ASTree>();
+        private static List<ASTNode> empty = new List<ASTNode>();
 
         public ASTLeaf(Token token)
         {
@@ -36,7 +36,7 @@ namespace Stone.AST
             get;
         }
 
-        public override ASTree GetChild(int i)
+        public override ASTNode GetChild(int i)
         {
             throw new IndexOutOfRangeException();
         }
@@ -56,7 +56,7 @@ namespace Stone.AST
             throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
-        public override IEnumerator<ASTree> GetChildren()
+        public override IEnumerator<ASTNode> GetChildren()
         {
             return empty.GetEnumerator();
         }

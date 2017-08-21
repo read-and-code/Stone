@@ -5,7 +5,7 @@ namespace Stone.Parsers
 {
     public abstract class Element
     {
-        public abstract void Parse(Lexer lexer, List<ASTree> asTrees);
+        public abstract void Parse(Lexer lexer, List<ASTNode> astNodes);
 
         public abstract bool Match(Lexer lexer);
     }

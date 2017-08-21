@@ -29,7 +29,7 @@ namespace Stone.Interpreter
             get;
         }
 
-        public object Invoke(object[] arguments, ASTree asTree)
+        public object Invoke(object[] arguments, ASTNode astNode)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Stone.Interpreter
             }
             catch
             {
-                throw new StoneException(string.Format("Bad native function call: {0}", this.Name), asTree);
+                throw new StoneException(string.Format("Bad native function call: {0}", this.Name), astNode);
             }
         }
 

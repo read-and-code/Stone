@@ -10,8 +10,8 @@ namespace Stone.Exceptions
         {
         }
 
-        public StoneException(string message, ASTree asTree)
-            : base(string.Format("{0} {1}", message, asTree.Location))
+        public StoneException(string message, ASTNode astNode)
+            : base(string.Format("{0} {1}", message, astNode.Location))
         {
         }
     }

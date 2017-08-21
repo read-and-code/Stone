@@ -20,11 +20,11 @@ namespace Stone.Tests
 
             while (lexer.Peek(0) != Token.EOF)
             {
-                ASTree asTree = arrayParser.Parse(lexer);
+                ASTNode astNode = arrayParser.Parse(lexer);
 
-                if (!(asTree is NullStatement))
+                if (!(astNode is NullStatement))
                 {
-                    object result = asTree.Eval(environment);
+                    object result = astNode.Eval(environment);
 
                     System.Console.WriteLine(result);
                 }

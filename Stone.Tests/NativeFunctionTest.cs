@@ -16,7 +16,7 @@ namespace Stone.Tests
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/native_function.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));
             BasicParser basicParser = new BasicParser();
-            IEnvironment environment = new NativeMethods().GetEnvironment(new Environment());
+            IEnvironment environment = new Environment();
 
             while (lexer.Peek(0) != Token.EOF)
             {

@@ -28,22 +28,22 @@ namespace Stone.Interpreter
             return DateTime.Now.Millisecond;
         }
 
-        public IEnvironment GetEnvironment(IEnvironment environment)
+        public static void AppendToEnvironment(IEnvironment environment)
         {
-            this.AppendNativeMethods(environment);
-
-            return environment;
+            AppendNativeMethods(environment);
         }
 
-        private void AppendNativeMethods(IEnvironment environment)
+        private static void AppendNativeMethods(IEnvironment environment)
         {
-            this.AppendNativeMethod(environment, "print", this.GetType(), "Print", typeof(object));
-            this.AppendNativeMethod(environment, "length", this.GetType(), "Length", typeof(string));
-            this.AppendNativeMethod(environment, "toInt", this.GetType(), "ToInt", typeof(object));
-            this.AppendNativeMethod(environment, "currentTime", this.GetType(), "CurrentTime");
+            Type type = typeof(NativeMethods);
+
+            AppendNativeMethod(environment, "print", type, "Print", typeof(object));
+            AppendNativeMethod(environment, "length", type, "Length", typeof(string));
+            AppendNativeMethod(environment, "toInt", type, "ToInt", typeof(object));
+            AppendNativeMethod(environment, "currentTime", type, "CurrentTime");
         }
 
-        private void AppendNativeMethod(IEnvironment environment, string methodName, Type type, string nativeMethodName, params Type[] types)
+        private static void AppendNativeMethod(IEnvironment environment, string methodName, Type type, string nativeMethodName, params Type[] types)
         {
             MethodInfo methodInfo;
 

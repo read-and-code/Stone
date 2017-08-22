@@ -13,6 +13,8 @@ namespace Stone.Interpreter
         {
             this.OuterEnvironment = environment;
             this.Values = new Dictionary<string, object>();
+
+            NativeMethods.AppendToEnvironment(this);
         }
 
         public IEnvironment OuterEnvironment

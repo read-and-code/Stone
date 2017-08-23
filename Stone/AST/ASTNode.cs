@@ -24,6 +24,8 @@ namespace Stone.AST
 
         public abstract void Eval(IEnvironment environment, int index, object value);
 
+        public abstract void Lookup(SymbolTable symbolTable);
+
         public abstract IEnumerator<ASTNode> GetChildren();
 
         public IEnumerator<ASTNode> GetEnumerator()

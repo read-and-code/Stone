@@ -24,6 +24,8 @@ namespace Stone.Tests
 
                 if (!(astNode is NullStatement))
                 {
+                    astNode.Lookup(environment.GetSymbolTable());
+
                     object result = astNode.Eval(environment);
 
                     System.Console.WriteLine(result);

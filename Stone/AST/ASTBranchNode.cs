@@ -54,6 +54,14 @@ namespace Stone.AST
             throw new StoneException(string.Format("Cannot eval: {0}", this), this);
         }
 
+        public override void Lookup(SymbolTable symbolTable)
+        {
+            foreach (ASTNode astNode in this)
+            {
+                astNode.Lookup(symbolTable);
+            }
+        }
+
         public override IEnumerator<ASTNode> GetChildren()
         {
             return this.Children.GetEnumerator();

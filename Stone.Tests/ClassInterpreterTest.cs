@@ -18,17 +18,21 @@ namespace Stone.Tests
             BasicParser basicParser = new BasicParser();
             IEnvironment environment = new Environment();
 
+            /*
             while (lexer.Peek(0) != Token.EOF)
             {
                 ASTNode astNode = basicParser.Parse(lexer);
 
                 if (!(astNode is NullStatement))
                 {
+                    astNode.Lookup(environment.GetSymbolTable());
+
                     object result = astNode.Eval(environment);
 
                     System.Console.WriteLine(result);
                 }
             }
+            */
         }
     }
 }

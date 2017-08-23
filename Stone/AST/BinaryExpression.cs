@@ -54,6 +54,24 @@ namespace Stone.AST
             }
         }
 
+        public override void Lookup(SymbolTable symbolTable)
+        {
+            ASTNode left = this.Left;
+
+            if (this.Operator == "=" && left is Name)
+            {
+                ((Name)left).LookupForAssignment(symbolTable);
+
+                this.Right.Lookup(symbolTable);
+
+                return;
+            }
+
+            left.Lookup(symbolTable);
+
+            this.Right.Lookup(symbolTable);
+        }
+
         private object ComputeAssignment(IEnvironment environment, object rightValue)
         {
             ASTNode left = this.Left;
@@ -96,7 +114,7 @@ namespace Stone.AST
 
             if (left is Name)
             {
-                environment.Put((left as Name).Value, rightValue);
+                ((Name)left).EvalForAssignment(environment, rightValue);
 
                 return rightValue;
             }

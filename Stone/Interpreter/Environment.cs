@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Stone.Exceptions;
 
 namespace Stone.Interpreter
 {
@@ -9,10 +11,16 @@ namespace Stone.Interpreter
         {
         }
 
-        public Environment(IEnvironment environment)
+        public Environment(IEnvironment outerEnvironment)
+            : this(10, outerEnvironment)
         {
-            this.OuterEnvironment = environment;
-            this.Values = new Dictionary<string, object>();
+        }
+
+        public Environment(int size, IEnvironment outerEnvironment)
+        {
+            this.OuterEnvironment = outerEnvironment;
+            this.SymbolTable = new SymbolTable();
+            this.Values = new object[size];
 
             NativeMethods.AppendToEnvironment(this);
         }
@@ -20,27 +28,69 @@ namespace Stone.Interpreter
         public IEnvironment OuterEnvironment
         {
             get;
-            set;
         }
 
-        protected Dictionary<string, object> Values
+        public SymbolTable SymbolTable
         {
             get;
         }
 
-        public object Get(string name)
+        private object[] Values
         {
-            object value = null;
+            get;
+            set;
+        }
 
-            this.Values.TryGetValue(name, out value);
-
-            if (value == null && this.OuterEnvironment != null)
+        public object Get(int nest, int index)
+        {
+            if (nest == 0)
             {
-                return this.OuterEnvironment.Get(name);
+                return this.Values[index];
+            }
+            else if (this.OuterEnvironment == null)
+            {
+                return null;
             }
             else
             {
-                return value;
+                return this.OuterEnvironment.Get(nest - 1, index);
+            }
+        }
+
+        public object Get(string name)
+        {
+            int index = this.SymbolTable.FindIndex(name);
+
+            if (index == -1)
+            {
+                if (this.OuterEnvironment == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return this.OuterEnvironment.Get(name);
+                }
+            }
+            else
+            {
+                return this.Values[index];
+            }
+        }
+
+        public void Put(int nest, int index, object value)
+        {
+            if (nest == 0)
+            {
+                this.Assign(index, value);
+            }
+            else if (this.OuterEnvironment == null)
+            {
+                new StoneException("No outer environment");
+            }
+            else
+            {
+                this.OuterEnvironment.Put(nest - 1, index, value);
             }
         }
 
@@ -58,12 +108,12 @@ namespace Stone.Interpreter
 
         public void PutNew(string name, object value)
         {
-            this.Values[name] = value;
+            this.Assign(this.SymbolTable.PutNew(name), value);
         }
 
         public IEnvironment Where(string name)
         {
-            if (this.Values.ContainsKey(name) && this.Values[name] != null)
+            if (this.SymbolTable.FindIndex(name) != -1)
             {
                 return this;
             }
@@ -75,6 +125,32 @@ namespace Stone.Interpreter
             {
                 return this.OuterEnvironment.Where(name);
             }
+        }
+
+        public SymbolTable GetSymbolTable()
+        {
+            return this.SymbolTable;
+        }
+
+        private void Assign(int index, object value)
+        {
+            if (index >= this.Values.Length)
+            {
+                int newLength = this.Values.Length * 2;
+
+                if (index >= newLength)
+                {
+                    newLength = index + 1;
+                }
+
+                object[] newValues = new object[newLength];
+
+                Array.Copy(this.Values, newValues, this.Values.Length);
+
+                this.Values = newValues;
+            }
+
+            this.Values[index] = value;
         }
     }
 }

@@ -26,9 +26,30 @@ namespace Stone.AST
             }
         }
 
+        private int Size
+        {
+            get;
+            set;
+        }
+
+        public static int Lookup(SymbolTable symbolTable, ParameterList parameterList, BlockStatement body)
+        {
+            SymbolTable newSymbolTable = new SymbolTable(symbolTable);
+
+            parameterList.Lookup(newSymbolTable);
+            body.Lookup(newSymbolTable);
+
+            return newSymbolTable.Size;
+        }
+
         public override object Eval(IEnvironment environment)
         {
-            return new Function(this.Parameters, this.Body, environment);
+            return new Function(this.Parameters, this.Body, environment, this.Size);
+        }
+
+        public override void Lookup(SymbolTable symbolTable)
+        {
+            this.Size = Lookup(symbolTable, this.Parameters, this.Body);
         }
 
         public override string ToString()

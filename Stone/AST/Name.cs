@@ -9,6 +9,7 @@ namespace Stone.AST
         public Name(Token token)
             : base(token)
         {
+            this.Index = -1;
         }
 
         public string Value
@@ -19,17 +20,62 @@ namespace Stone.AST
             }
         }
 
+        public int Nest
+        {
+            get;
+            private set;
+        }
+
+        public int Index
+        {
+            get;
+            private set;
+        }
+
         public override object Eval(IEnvironment environment)
         {
-            object value = environment.Get(this.Value);
+            if (this.Index == -1)
+            {
+                return environment.Get(this.Value);
+            }
+            else
+            {
+                return environment.Get(this.Nest, this.Index);
+            }
+        }
 
-            if (value == null)
+        public override void Lookup(SymbolTable symbolTable)
+        {
+            Location location = symbolTable.GetLocation(this.Value);
+
+            if (location == null)
             {
                 throw new StoneException(string.Format("Undefined name: {0}", this.Value), this);
             }
             else
             {
-                return value;
+                this.Nest = location.Nest;
+                this.Index = location.Index;
+            }
+        }
+
+        public void LookupForAssignment(SymbolTable symbolTable)
+        {
+            Location location = symbolTable.Put(this.Value);
+
+            this.Nest = location.Nest;
+            this.Index = location.Index;
+        }
+
+        public void EvalForAssignment(IEnvironment environment, object value)
+        {
+            if (this.Index == -1)
+            {
+                environment.Put(this.Value, value);
+            }
+            else
+            {
+                environment.Put(this.Nest, this.Index, value);
             }
         }
     }

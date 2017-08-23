@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Stone.Interpreter;
 
 namespace Stone.AST
@@ -18,9 +19,22 @@ namespace Stone.AST
             }
         }
 
+        private int[] Offsets
+        {
+            get;
+            set;
+        }
+
         public override void Eval(IEnvironment environment, int index, object value)
         {
-            environment.PutNew(this.GetName(index), value);
+            environment.Put(0, this.Offsets[index], value);
+        }
+
+        public override void Lookup(SymbolTable symbolTable)
+        {
+            this.Offsets = Enumerable.Range(0, this.Size)
+                .Select(i => symbolTable.PutNew(this.GetName(i)))
+                .ToArray();
         }
 
         private string GetName(int index)

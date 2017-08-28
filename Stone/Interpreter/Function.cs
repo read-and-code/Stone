@@ -17,6 +17,17 @@ namespace Stone.Interpreter
             this.MemorySize = memorySize;
         }
 
+        public Function(ParameterList parameters, BlockStatement body, IEnvironment environment, int memorySize, StoneObject self)
+            : this(parameters, body, environment, memorySize)
+        {
+            this.Self = self;
+        }
+
+        public StoneObject Self
+        {
+            get;
+        }
+
         public ParameterList Parameters
         {
             get;
@@ -39,7 +50,11 @@ namespace Stone.Interpreter
 
         public IEnvironment MakeEnvironment()
         {
-            return new Environment(this.MemorySize, this.Environment);
+            IEnvironment environment = new Environment(this.MemorySize, this.Environment);
+
+            environment.Put(0, 0, this.Self);
+
+            return environment;
         }
 
         public override string ToString()

@@ -26,12 +26,12 @@ namespace Stone.AST
             if (value is ClassInfo && memberName == "new")
             {
                 ClassInfo classInfo = (ClassInfo)value;
-                Environment innerEnvironment = new Environment(classInfo.Environment);
-                StoneObject stoneObject = new StoneObject(innerEnvironment);
+                IEnvironment newEnvironment = new Environment(1, classInfo.Environment);
+                StoneObject stoneObject = new StoneObject(classInfo, classInfo.Size);
 
-                innerEnvironment.PutNew("this", stoneObject);
+                newEnvironment.Put(0, 0, stoneObject);
 
-                this.InitializeObject(classInfo, innerEnvironment);
+                this.InitializeObject(classInfo, stoneObject, newEnvironment);
 
                 return stoneObject;
             }
@@ -59,6 +59,16 @@ namespace Stone.AST
             if (classInfo.SuperClass != null)
             {
                 this.InitializeObject(classInfo.SuperClass, environment);
+            }
+
+            classInfo.Body.Eval(environment);
+        }
+
+        private void InitializeObject(ClassInfo classInfo, StoneObject stoneObject, IEnvironment environment)
+        {
+            if (classInfo.SuperClass != null)
+            {
+                this.InitializeObject(classInfo.SuperClass, stoneObject, environment);
             }
 
             classInfo.Body.Eval(environment);

@@ -38,6 +38,14 @@ namespace Stone.AST
             {
                 return environment.Get(this.Value);
             }
+            else if (this.Nest == MemberSymbolTable.EntityTypeField)
+            {
+                return this.GetThis(environment).Read(this.Index);
+            }
+            else if (this.Nest == MemberSymbolTable.EntityTypeMethod)
+            {
+                return this.GetThis(environment).GetMethod(this.Index);
+            }
             else
             {
                 return environment.Get(this.Nest, this.Index);
@@ -73,10 +81,23 @@ namespace Stone.AST
             {
                 environment.Put(this.Value, value);
             }
+            else if (this.Nest == MemberSymbolTable.EntityTypeField)
+            {
+                this.GetThis(environment).Write(this.Index, value);
+            }
+            else if (this.Nest == MemberSymbolTable.EntityTypeMethod)
+            {
+                throw new StoneException(string.Format("Cannot update a method: {0}", this.Value), this);
+            }
             else
             {
                 environment.Put(this.Nest, this.Index, value);
             }
+        }
+
+        private StoneObject GetThis(IEnvironment environment)
+        {
+            return (StoneObject)environment.Get(0, 0);
         }
     }
 }

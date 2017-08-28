@@ -11,6 +11,7 @@ namespace Stone.Interpreter
         public int Nest
         {
             get;
+            set;
         }
 
         public int Index

@@ -50,7 +50,7 @@ namespace Stone.Interpreter
             return this.GetLocation(key, 0);
         }
 
-        public Location GetLocation(string key, int nest)
+        public virtual Location GetLocation(string key, int nest)
         {
             int index = this.FindIndex(key);
 
@@ -71,7 +71,7 @@ namespace Stone.Interpreter
             }
         }
 
-        public int PutNew(string key)
+        public virtual int PutNew(string key)
         {
             int index = this.FindIndex(key);
 
@@ -85,7 +85,7 @@ namespace Stone.Interpreter
             }
         }
 
-        public Location Put(string key)
+        public virtual Location Put(string key)
         {
             Location location = this.GetLocation(key, 0);
 

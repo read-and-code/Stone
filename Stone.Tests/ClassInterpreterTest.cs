@@ -18,7 +18,6 @@ namespace Stone.Tests
             BasicParser basicParser = new BasicParser();
             IEnvironment environment = new Environment();
 
-            /*
             while (lexer.Peek(0) != Token.EOF)
             {
                 ASTNode astNode = basicParser.Parse(lexer);
@@ -32,7 +31,6 @@ namespace Stone.Tests
                     System.Console.WriteLine(result);
                 }
             }
-            */
         }
     }
 }

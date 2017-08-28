@@ -1,41 +1,74 @@
+using System.Collections.Generic;
 using Stone.Exceptions;
 
 namespace Stone.Interpreter
 {
     public class StoneObject
     {
-        public StoneObject(IEnvironment environment)
+        public StoneObject(ClassInfo classInfo, int size)
         {
-            this.Environment = environment;
+            this.ClassInfo = classInfo;
+            this.Fields = new object[size];
         }
 
-        public IEnvironment Environment
+        public ClassInfo ClassInfo
+        {
+            get;
+        }
+
+        public object[] Fields
         {
             get;
         }
 
         public object Read(string memberName)
         {
-            return this.GetEnvironment(memberName).Get(memberName);
+            int index = this.ClassInfo.GetFieldIndex(memberName);
+
+            if (index != -1)
+            {
+                return this.Fields[index];
+            }
+            else
+            {
+                index = this.ClassInfo.GetMethodIndex(memberName);
+
+                if (index != -1)
+                {
+                    return this.GetMethod(index);
+                }
+            }
+
+            throw new AccessException();
+        }
+
+        public object Read(int index)
+        {
+            return this.Fields[index];
         }
 
         public void Write(string memberName, object value)
         {
-            this.GetEnvironment(memberName).PutNew(memberName, value);
-        }
+            int index = this.ClassInfo.GetFieldIndex(memberName);
 
-        private IEnvironment GetEnvironment(string memberName)
-        {
-            IEnvironment environment = this.Environment.Where(memberName);
-
-            if (environment != null && environment == this.Environment)
-            {
-                return environment;
-            }
-            else
+            if (index == -1)
             {
                 throw new AccessException();
             }
+            else
+            {
+                this.Fields[index] = value;
+            }
+        }
+
+        public void Write(int index, object value)
+        {
+            this.Fields[index] = value;
+        }
+
+        public object GetMethod(int index)
+        {
+            return this.ClassInfo.GetMethod(this, index);
         }
     }
 }

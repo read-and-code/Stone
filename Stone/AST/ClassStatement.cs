@@ -43,11 +43,30 @@ namespace Stone.AST
 
         public override object Eval(IEnvironment environment)
         {
-            ClassInfo classInfo = new ClassInfo(this, environment);
+            SymbolTable methodsSymbolTable = new MemberSymbolTable(environment.GetSymbolTable(), MemberSymbolTable.EntityTypeMethod);
+            SymbolTable fieldsSymbolTable = new MemberSymbolTable(methodsSymbolTable, MemberSymbolTable.EntityTypeField);
+            ClassInfo classInfo = new ClassInfo(this, environment, methodsSymbolTable, fieldsSymbolTable);
 
             environment.Put(this.Name, classInfo);
 
+            List<DefStatement> methodDefinitions = new List<DefStatement>();
+
+            if (classInfo.SuperClass != null)
+            {
+                classInfo.SuperClass.CopyTo(methodsSymbolTable, fieldsSymbolTable, methodDefinitions);
+            }
+
+            SymbolTable newSymbolTable = new ThisSymbolTable(fieldsSymbolTable);
+
+            this.Body.Lookup(newSymbolTable, methodsSymbolTable, fieldsSymbolTable, methodDefinitions);
+
+            classInfo.MethodDefinitions = methodDefinitions;
+
             return this.Name;
+        }
+
+        public override void Lookup(SymbolTable symbolTable)
+        {
         }
 
         public override string ToString()

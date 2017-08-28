@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Stone.Exceptions;
 using Stone.Interpreter;
 
 namespace Stone.AST
@@ -34,13 +35,13 @@ namespace Stone.AST
             }
         }
 
-        private int Index
+        public int Size
         {
             get;
             set;
         }
 
-        private int Size
+        private int Index
         {
             get;
             set;
@@ -57,6 +58,18 @@ namespace Stone.AST
         {
             this.Index = symbolTable.PutNew(this.Name);
             this.Size = AnonymousFunction.Lookup(symbolTable, this.Parameters, this.Body);
+        }
+
+        public void LookupAsMethod(SymbolTable symbolTable)
+        {
+            SymbolTable newSymbolTable = new SymbolTable(symbolTable);
+
+            newSymbolTable.PutNew("this");
+
+            this.Parameters.Lookup(newSymbolTable);
+            this.Body.Lookup(newSymbolTable);
+
+            this.Size = newSymbolTable.Size;
         }
 
         public override string ToString()

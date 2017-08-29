@@ -11,7 +11,7 @@ namespace Stone.Tests
     public class ClassInterpreterTest
     {
         [Fact]
-        public void CreateObject()
+        public static void CreateObject()
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "samples/class.st");
             Lexer lexer = new Lexer(new FileStream(filePath, FileMode.Open, FileAccess.Read));

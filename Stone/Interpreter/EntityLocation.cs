@@ -1,8 +1,8 @@
 namespace Stone.Interpreter
 {
-    public class Location
+    public class EntityLocation
     {
-        public Location(int nest, int index)
+        public EntityLocation(int nest, int index)
         {
             this.Nest = nest;
             this.Index = index;

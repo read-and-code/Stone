@@ -45,12 +45,12 @@ namespace Stone.Interpreter
             return this.Values.ContainsKey(key) ? this.Values[key] : -1;
         }
 
-        public Location GetLocation(string key)
+        public EntityLocation GetEntityLocation(string key)
         {
-            return this.GetLocation(key, 0);
+            return this.GetEntityLocation(key, 0);
         }
 
-        public virtual Location GetLocation(string key, int nest)
+        public virtual EntityLocation GetEntityLocation(string key, int nest)
         {
             int index = this.FindIndex(key);
 
@@ -62,12 +62,12 @@ namespace Stone.Interpreter
                 }
                 else
                 {
-                    return this.OuterSymbolTable.GetLocation(key, nest + 1);
+                    return this.OuterSymbolTable.GetEntityLocation(key, nest + 1);
                 }
             }
             else
             {
-                return new Location(nest, index);
+                return new EntityLocation(nest, index);
             }
         }
 
@@ -85,17 +85,17 @@ namespace Stone.Interpreter
             }
         }
 
-        public virtual Location Put(string key)
+        public virtual EntityLocation Put(string key)
         {
-            Location location = this.GetLocation(key, 0);
+            EntityLocation entityLocation = this.GetEntityLocation(key, 0);
 
-            if (location == null)
+            if (entityLocation == null)
             {
-                return new Location(0, this.Add(key));
+                return new EntityLocation(0, this.Add(key));
             }
             else
             {
-                return location;
+                return entityLocation;
             }
         }
 

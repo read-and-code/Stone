@@ -15,16 +15,16 @@ namespace Stone.Interpreter
             throw new StoneException("Fatal");
         }
 
-        public override Location Put(string key)
+        public override EntityLocation Put(string key)
         {
-            Location location = this.OuterSymbolTable.Put(key);
+            EntityLocation entityLocation = this.OuterSymbolTable.Put(key);
 
-            if (location.Nest >= 0)
+            if (entityLocation.Nest >= 0)
             {
-                location.Nest++;
+                entityLocation.Nest++;
             }
 
-            return location;
+            return entityLocation;
         }
     }
 }

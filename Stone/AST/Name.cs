@@ -54,25 +54,25 @@ namespace Stone.AST
 
         public override void Lookup(SymbolTable symbolTable)
         {
-            Location location = symbolTable.GetLocation(this.Value);
+            EntityLocation entityLocation = symbolTable.GetEntityLocation(this.Value);
 
-            if (location == null)
+            if (entityLocation == null)
             {
                 throw new StoneException(string.Format("Undefined name: {0}", this.Value), this);
             }
             else
             {
-                this.Nest = location.Nest;
-                this.Index = location.Index;
+                this.Nest = entityLocation.Nest;
+                this.Index = entityLocation.Index;
             }
         }
 
         public void LookupForAssignment(SymbolTable symbolTable)
         {
-            Location location = symbolTable.Put(this.Value);
+            EntityLocation entityLocation = symbolTable.Put(this.Value);
 
-            this.Nest = location.Nest;
-            this.Index = location.Index;
+            this.Nest = entityLocation.Nest;
+            this.Index = entityLocation.Index;
         }
 
         public void EvalForAssignment(IEnvironment environment, object value)

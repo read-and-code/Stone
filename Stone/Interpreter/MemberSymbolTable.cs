@@ -17,7 +17,7 @@ namespace Stone.Interpreter
             get;
         }
 
-        public override Location GetLocation(string key, int nest)
+        public override EntityLocation GetEntityLocation(string key, int nest)
         {
             int index = this.FindIndex(key);
 
@@ -29,26 +29,26 @@ namespace Stone.Interpreter
                 }
                 else
                 {
-                    return this.OuterSymbolTable.GetLocation(key, nest);
+                    return this.OuterSymbolTable.GetEntityLocation(key, nest);
                 }
             }
             else
             {
-                return new Location(this.MemberType, index);
+                return new EntityLocation(this.MemberType, index);
             }
         }
 
-        public override Location Put(string key)
+        public override EntityLocation Put(string key)
         {
-            Location location = this.GetLocation(key, 0);
+            EntityLocation entityLocation = this.GetEntityLocation(key, 0);
 
-            if (location == null)
+            if (entityLocation == null)
             {
-                return new Location(this.MemberType, this.Add(key));
+                return new EntityLocation(this.MemberType, this.Add(key));
             }
             else
             {
-                return location;
+                return entityLocation;
             }
         }
     }

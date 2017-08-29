@@ -37,6 +37,18 @@ namespace Stone.AST
             }
         }
 
+        private ClassInfo ClassInfo
+        {
+            get;
+            set;
+        }
+
+        private int Index
+        {
+            get;
+            set;
+        }
+
         public override object Eval(IEnvironment environment)
         {
             if (this.Operator == "=")
@@ -169,16 +181,21 @@ namespace Stone.AST
 
         private void SetField(StoneObject stoneObject, Dot expression, object rightValue)
         {
-            string name = expression.Name;
+            if (stoneObject.ClassInfo != this.ClassInfo)
+            {
+                string memberName = expression.Name;
+                this.ClassInfo = stoneObject.ClassInfo;
+                int index = this.ClassInfo.GetFieldIndex(memberName);
 
-            try
-            {
-                stoneObject.Write(name, rightValue);
+                if (index == -1)
+                {
+                    throw new StoneException(string.Format("Bad member access: {0}", memberName), this);
+                }
+
+                this.Index = index;
             }
-            catch
-            {
-                throw new StoneException(string.Format("Bad member access {0}: {1}", this.Location, name));
-            }
+
+            stoneObject.Write(this.Index, rightValue);
         }
     }
 }

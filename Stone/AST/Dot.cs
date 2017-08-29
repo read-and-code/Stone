@@ -19,6 +19,24 @@ namespace Stone.AST
             }
         }
 
+        private ClassInfo ClassInfo
+        {
+            get;
+            set;
+        }
+
+        private bool IsField
+        {
+            get;
+            set;
+        }
+
+        private int Index
+        {
+            get;
+            set;
+        }
+
         public override object Eval(IEnvironment environment, object value)
         {
             string memberName = this.Name;
@@ -37,12 +55,20 @@ namespace Stone.AST
             }
             else if (value is StoneObject)
             {
-                try
+                StoneObject target = (StoneObject)value;
+
+                if (target.ClassInfo != this.ClassInfo)
                 {
-                    return ((StoneObject)value).Read(memberName);
+                    this.UpdateCache(target);
                 }
-                catch
+
+                if (this.IsField)
                 {
+                    return target.Read(this.Index);
+                }
+                else
+                {
+                    return target.GetMethod(this.Index);
                 }
             }
 
@@ -72,6 +98,33 @@ namespace Stone.AST
             }
 
             classInfo.Body.Eval(environment);
+        }
+
+        private void UpdateCache(StoneObject target)
+        {
+            string memberName = this.Name;
+            this.ClassInfo = target.ClassInfo;
+            int index = this.ClassInfo.GetFieldIndex(memberName);
+
+            if (index != -1)
+            {
+                this.IsField = true;
+                this.Index = index;
+
+                return;
+            }
+
+            index = this.ClassInfo.GetMethodIndex(memberName);
+
+            if (index != -1)
+            {
+                this.IsField = false;
+                this.Index = index;
+
+                return;
+            }
+
+            throw new StoneException(string.Format("Bad member access: {0}", this.Name), this);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Stone.Interpreter
             this.Fields = new object[size];
         }
 
-        private ClassInfo ClassInfo
+        public ClassInfo ClassInfo
         {
             get;
         }

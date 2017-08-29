@@ -56,7 +56,7 @@ namespace Stone
             }
         }
 
-        protected void ReadLine()
+        private void ReadLine()
         {
             string line;
 
@@ -89,7 +89,7 @@ namespace Stone
             this.queue.Add(new IdentifierToken(lineNumber, Token.EOL));
         }
 
-        protected void AddToken(int lineNumber, Match match)
+        private void AddToken(int lineNumber, Match match)
         {
             Group group = match.Groups[1];
 
@@ -114,7 +114,7 @@ namespace Stone
             }
         }
 
-        protected string ConvertToStringLiteral(string value)
+        private string ConvertToStringLiteral(string value)
         {
             StringBuilder stringBuilder = new StringBuilder();
             int length = value.Length - 1;

@@ -10,7 +10,7 @@ namespace Stone.AST
         {
         }
 
-        public int Value
+        private int Value
         {
             get
             {

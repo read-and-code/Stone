@@ -10,7 +10,7 @@ namespace Stone.AST
         {
         }
 
-        public string Value
+        private string Value
         {
             get
             {

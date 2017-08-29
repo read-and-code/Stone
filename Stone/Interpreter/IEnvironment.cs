@@ -2,6 +2,11 @@ namespace Stone.Interpreter
 {
     public interface IEnvironment
     {
+        SymbolTable SymbolTable
+        {
+            get;
+        }
+
         object Get(string name);
 
         object Get(int nest, int index);
@@ -13,7 +18,5 @@ namespace Stone.Interpreter
         void PutNew(string name, object value);
 
         IEnvironment Where(string name);
-
-        SymbolTable GetSymbolTable();
     }
 }

@@ -25,12 +25,12 @@ namespace Stone.Interpreter
             NativeMethods.AppendToEnvironment(this);
         }
 
-        public IEnvironment OuterEnvironment
+        public SymbolTable SymbolTable
         {
             get;
         }
 
-        public SymbolTable SymbolTable
+        private IEnvironment OuterEnvironment
         {
             get;
         }
@@ -125,11 +125,6 @@ namespace Stone.Interpreter
             {
                 return this.OuterEnvironment.Where(name);
             }
-        }
-
-        public SymbolTable GetSymbolTable()
-        {
-            return this.SymbolTable;
         }
 
         private void Assign(int index, object value)

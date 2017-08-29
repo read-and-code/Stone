@@ -30,11 +30,6 @@ namespace Stone.Interpreter
             this.FieldsSymbolTable = fieldsSymbolTable;
         }
 
-        public ClassStatement Definition
-        {
-            get;
-        }
-
         public IEnvironment Environment
         {
             get;
@@ -45,20 +40,7 @@ namespace Stone.Interpreter
             get;
         }
 
-        public string Name
-        {
-            get
-            {
-                return this.Definition.Name;
-            }
-        }
-
         public SymbolTable MethodsSymbolTable
-        {
-            get;
-        }
-
-        public SymbolTable FieldsSymbolTable
         {
             get;
         }
@@ -83,6 +65,24 @@ namespace Stone.Interpreter
             {
                 return this.FieldsSymbolTable.Size;
             }
+        }
+
+        private ClassStatement Definition
+        {
+            get;
+        }
+
+        private string Name
+        {
+            get
+            {
+                return this.Definition.Name;
+            }
+        }
+
+        private SymbolTable FieldsSymbolTable
+        {
+            get;
         }
 
         public void CopyTo(SymbolTable methodsSymbolTable, SymbolTable fieldsSymbolTable, List<DefStatement> methodDefinitions)

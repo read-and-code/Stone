@@ -24,13 +24,13 @@ namespace Stone.Parsers
             this.Type = parser.Type;
         }
 
-        protected Type Type
+        private Type Type
         {
             get;
             set;
         }
 
-        protected List<Element> Elements
+        private List<Element> Elements
         {
             get;
             set;
@@ -95,26 +95,6 @@ namespace Stone.Parsers
             }
         }
 
-        public Parser Reset()
-        {
-            this.Elements = new List<Element>();
-
-            return this;
-        }
-
-        public Parser Reset(Type type)
-        {
-            this.Type = type;
-            this.Elements = new List<Element>();
-
-            return this;
-        }
-
-        public Parser Number()
-        {
-            return this.Number(null);
-        }
-
         public Parser Number(Type type)
         {
             this.Elements.Add(new NumberTokenElement(type));
@@ -134,21 +114,9 @@ namespace Stone.Parsers
             return this;
         }
 
-        public Parser String()
-        {
-            return this.String(null);
-        }
-
         public Parser String(Type type)
         {
             this.Elements.Add(new StringTokenElement(type));
-
-            return this;
-        }
-
-        public Parser Token(List<string> tokens)
-        {
-            this.Elements.Add(new Leaf(tokens));
 
             return this;
         }
@@ -191,13 +159,6 @@ namespace Stone.Parsers
         public Parser Repeat(Parser parser)
         {
             this.Elements.Add(new Repeat(parser, false));
-
-            return this;
-        }
-
-        public Parser Expression(Parser subExpression, Operators operators)
-        {
-            this.Elements.Add(new Expression(null, subExpression, operators));
 
             return this;
         }

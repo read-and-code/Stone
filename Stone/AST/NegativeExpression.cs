@@ -12,7 +12,7 @@ namespace Stone.AST
         {
         }
 
-        public ASTNode Operand
+        private ASTNode Operand
         {
             get
             {

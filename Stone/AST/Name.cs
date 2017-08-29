@@ -12,7 +12,7 @@ namespace Stone.AST
             this.Index = -1;
         }
 
-        public string Value
+        private string Value
         {
             get
             {
@@ -20,16 +20,16 @@ namespace Stone.AST
             }
         }
 
-        public int Nest
+        private int Nest
         {
             get;
-            private set;
+            set;
         }
 
-        public int Index
+        private int Index
         {
             get;
-            private set;
+            set;
         }
 
         public override object Eval(IEnvironment environment)

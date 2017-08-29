@@ -14,7 +14,7 @@ namespace Stone.Parsers
             this.Tokens = tokens;
         }
 
-        public List<string> Tokens
+        private List<string> Tokens
         {
             get;
         }

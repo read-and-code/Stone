@@ -13,7 +13,7 @@ namespace Stone.AST
         {
         }
 
-        public ASTNode Left
+        private ASTNode Left
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Stone.AST
             }
         }
 
-        public string Operator
+        private string Operator
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTNode Right
+        private ASTNode Right
         {
             get
             {

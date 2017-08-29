@@ -43,7 +43,7 @@ namespace Stone.AST
 
         public override object Eval(IEnvironment environment)
         {
-            SymbolTable methodsSymbolTable = new MemberSymbolTable(environment.GetSymbolTable(), MemberSymbolTable.EntityTypeMethod);
+            SymbolTable methodsSymbolTable = new MemberSymbolTable(environment.SymbolTable, MemberSymbolTable.EntityTypeMethod);
             SymbolTable fieldsSymbolTable = new MemberSymbolTable(methodsSymbolTable, MemberSymbolTable.EntityTypeField);
             ClassInfo classInfo = new ClassInfo(this, environment, methodsSymbolTable, fieldsSymbolTable);
 

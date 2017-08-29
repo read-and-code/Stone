@@ -10,7 +10,7 @@ namespace Stone.AST
         {
         }
 
-        public int Size
+        private int Size
         {
             get
             {
@@ -21,8 +21,7 @@ namespace Stone.AST
         public override object Eval(IEnvironment environment)
         {
             int i = 0;
-            int size = this.NumberOfChildren;
-            object[] array = new object[size];
+            object[] array = new object[this.Size];
 
             foreach (ASTNode astNode in this)
             {

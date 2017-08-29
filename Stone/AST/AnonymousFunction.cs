@@ -10,7 +10,7 @@ namespace Stone.AST
         {
         }
 
-        public ParameterList Parameters
+        private ParameterList Parameters
         {
             get
             {
@@ -18,7 +18,7 @@ namespace Stone.AST
             }
         }
 
-        public BlockStatement Body
+        private BlockStatement Body
         {
             get
             {

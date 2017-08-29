@@ -12,7 +12,7 @@ namespace Stone.Parsers
             this.Parsers = parsers;
         }
 
-        public List<Parser> Parsers
+        private List<Parser> Parsers
         {
             get;
         }

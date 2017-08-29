@@ -11,12 +11,12 @@ namespace Stone.Parsers
             this.OnlyOnce = onlyOnce;
         }
 
-        public Parser Parser
+        private Parser Parser
         {
             get;
         }
 
-        public bool OnlyOnce
+        private bool OnlyOnce
         {
             get;
         }

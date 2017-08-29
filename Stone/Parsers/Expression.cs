@@ -14,12 +14,12 @@ namespace Stone.Parsers
             this.Operators = operators;
         }
 
-        public Operators Operators
+        private Operators Operators
         {
             get;
         }
 
-        public Parser Factor
+        private Parser Factor
         {
             get;
         }
@@ -37,7 +37,7 @@ namespace Stone.Parsers
 
             while (precedence != null)
             {
-                right = this.DoShift(lexer, right, precedence.Value);
+                right = this.Shift(lexer, right, precedence.Value);
 
                 precedence = this.NextOperator(lexer);
             }
@@ -76,7 +76,7 @@ namespace Stone.Parsers
             }
         }
 
-        private ASTNode DoShift(Lexer lexer, ASTNode left, int precedenceValue)
+        private ASTNode Shift(Lexer lexer, ASTNode left, int precedenceValue)
         {
             List<ASTNode> astNodes = new List<ASTNode>();
             astNodes.Add(left);
@@ -87,7 +87,7 @@ namespace Stone.Parsers
 
             while (nextPrecedence != null && IsRightExpression(precedenceValue, nextPrecedence))
             {
-                right = this.DoShift(lexer, right, nextPrecedence.Value);
+                right = this.Shift(lexer, right, nextPrecedence.Value);
 
                 nextPrecedence = this.NextOperator(lexer);
             }

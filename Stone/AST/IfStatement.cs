@@ -11,7 +11,7 @@ namespace Stone.AST
         {
         }
 
-        public ASTNode Condition
+        private ASTNode Condition
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTNode ThenBlock
+        private ASTNode ThenBlock
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Stone.AST
             }
         }
 
-        public ASTNode ElseBlock
+        private ASTNode ElseBlock
         {
             get
             {

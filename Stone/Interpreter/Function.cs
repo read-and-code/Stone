@@ -23,11 +23,6 @@ namespace Stone.Interpreter
             this.Self = self;
         }
 
-        public StoneObject Self
-        {
-            get;
-        }
-
         public ParameterList Parameters
         {
             get;
@@ -38,7 +33,12 @@ namespace Stone.Interpreter
             get;
         }
 
-        protected IEnvironment Environment
+        private StoneObject Self
+        {
+            get;
+        }
+
+        private IEnvironment Environment
         {
             get;
         }

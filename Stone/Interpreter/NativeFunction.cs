@@ -14,17 +14,17 @@ namespace Stone.Interpreter
             this.NumberOfParameters = methodInfo.GetParameters().Length;
         }
 
-        public string Name
-        {
-            get;
-        }
-
-        public MethodInfo MethodInfo
-        {
-            get;
-        }
-
         public int NumberOfParameters
+        {
+            get;
+        }
+
+        private string Name
+        {
+            get;
+        }
+
+        private MethodInfo MethodInfo
         {
             get;
         }

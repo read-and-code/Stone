@@ -13,7 +13,7 @@ namespace Stone.Parsers
             this.Type = type == null ? typeof(ASTLeaf) : type;
         }
 
-        protected Type Type
+        private Type Type
         {
             get;
         }

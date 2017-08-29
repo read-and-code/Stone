@@ -12,7 +12,7 @@ namespace Stone.Interpreter
             this.MemberType = memberType;
         }
 
-        public int MemberType
+        private int MemberType
         {
             get;
         }

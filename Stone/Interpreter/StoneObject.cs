@@ -11,12 +11,12 @@ namespace Stone.Interpreter
             this.Fields = new object[size];
         }
 
-        public ClassInfo ClassInfo
+        private ClassInfo ClassInfo
         {
             get;
         }
 
-        public object[] Fields
+        private object[] Fields
         {
             get;
         }

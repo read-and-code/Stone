@@ -18,7 +18,7 @@ namespace Stone.Tests
 
             while (token != Token.EOF)
             {
-                System.Console.WriteLine(token.ToString());
+                System.Console.WriteLine(string.Format("{0}: {1}", token.LineNumber, token.ToString()));
 
                 if (token.IsIdentifier || token.IsString)
                 {

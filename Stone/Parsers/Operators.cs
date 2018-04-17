@@ -12,7 +12,7 @@ namespace Stone.Parsers
             }
         }
 
-        public static bool RIGHT
+        public static bool Right
         {
             get
             {

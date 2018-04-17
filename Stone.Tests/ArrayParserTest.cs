@@ -1,5 +1,4 @@
 using System.IO;
-using Stone;
 using Stone.AST;
 using Stone.Interpreter;
 using Stone.Parsers;

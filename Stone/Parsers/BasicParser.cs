@@ -91,7 +91,7 @@ namespace Stone.Parsers
                     })
                 .Separator(new List<string> { ";", Token.EOL });
 
-            this.operators.Put("=", 1, Operators.RIGHT);
+            this.operators.Put("=", 1, Operators.Right);
             this.operators.Put("==", 2, Operators.Left);
             this.operators.Put(">", 2, Operators.Left);
             this.operators.Put("<", 2, Operators.Left);

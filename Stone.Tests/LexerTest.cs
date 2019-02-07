@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Stone;
 using Stone.Tokens;
 using Xunit;
 
@@ -18,7 +18,7 @@ namespace Stone.Tests
 
             while (token != Token.EOF)
             {
-                System.Console.WriteLine(string.Format("{0}: {1}", token.LineNumber, token.ToString()));
+                Console.WriteLine(string.Format("{0}: {1}", token.LineNumber, token.ToString()));
 
                 if (token.IsIdentifier || token.IsString)
                 {

@@ -1,5 +1,5 @@
+using System;
 using System.IO;
-using Stone;
 using Stone.AST;
 using Stone.Parsers;
 using Stone.Tokens;
@@ -20,7 +20,7 @@ namespace Stone.Tests
             {
                 ASTNode astNode = basicParser.Parse(lexer);
 
-                System.Console.WriteLine(astNode.ToString());
+                Console.WriteLine(astNode.ToString());
             }
         }
     }

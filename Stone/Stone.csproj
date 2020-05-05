@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <DebugType>full</DebugType>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <NoWarn>$(NoWarn);SA0001;SA1633;SA1200</NoWarn>
